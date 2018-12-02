@@ -1,0 +1,58 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "test",
+            "type": "shell",
+            "command": "bin\\clang\\dISToBJ.exe",
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "clang++",
+            "type": "process",
+            "command": "clang++",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "args": [
+                "-Wall",
+                "-Wno-unknown-pragmas",
+                "Test\\*.cpp",
+                "-obin\\clang\\dISToBJ.exe",
+                "-v",
+                "-gfull",
+                "-std=c++17",
+                "-ITest",
+                "-IC:\\Program Files\\LLVM\\include",
+                "-LC:\\Program Files\\LLVM\\lib"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}",
+                "env": {
+                    "path": "C:\\Program Files\\LLVM\\bin;${env:Path}"
+                }
+            },       
+             "problemMatcher": {
+                "owner": "cpp",
+                "fileLocation": [
+                    "relative",
+                    "${workspaceRoot}"
+                ],
+                "pattern": {
+                    "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
+                    "file": 1,
+                    "line": 2,
+                    "column": 3,
+                    "severity": 4,
+                    "message": 5
+                }
+            }
+        }
+    ]
+}
