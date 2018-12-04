@@ -23,11 +23,13 @@
             "args": [
                 "-Wall",
                 "-Wno-unknown-pragmas",
-                "Test\\*.cpp",
+                "*\\*.cpp",
                 "-obin\\clang\\dISToBJ.exe",
                 "-v",
                 "-gfull",
                 "-std=c++17",
+                "-IPch",
+                "-IBase",
                 "-ITest",
                 "-IC:\\Program Files\\LLVM\\include",
                 "-LC:\\Program Files\\LLVM\\lib"
@@ -45,7 +47,7 @@
                     "${workspaceRoot}"
                 ],
                 "pattern": {
-                    "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
+                    "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error|fatal error):\\s+(.*)$",
                     "file": 1,
                     "line": 2,
                     "column": 3,

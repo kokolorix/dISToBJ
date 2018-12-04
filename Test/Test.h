@@ -3,22 +3,10 @@
 #ifndef TestH
 #define TestH
 //---------------------------------------------------------------------------
-#include <sstream>
-#include <iostream>
-#include <typeinfo>
-#include <memory>
-#include <functional>
 #include <windows.h>
 #include <assert.h>
-namespace srdev
-{
-	using ::std::istringstream;
-	using ::std::ostringstream;
-	using ::std::shared_ptr;
-	using ::std::make_shared;
+#include "Base.h"
 
-	using String = std::string;
-}
 namespace srdev
 {
 	enum struct TestResult
@@ -27,6 +15,7 @@ namespace srdev
 	};
 
 	TestResult runTests(const String& testPattern = "*");
+	void writeOutput(const VectorOfStringVectors& outputs);
 
 	namespace Test
 	{
@@ -36,6 +25,7 @@ namespace srdev
 			virtual void buildUp() {}
 			virtual TestResult runTest() = 0;
 			virtual void breakDown() {}
+
 		};
 		using CasePtr = std::shared_ptr<Case>;
 		bool addTestCase(CasePtr pTest, const String& name);
