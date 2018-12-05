@@ -1,6 +1,6 @@
 //---------------------------------------------------------------------------
-#ifndef BaseTestsH
-#define BaseTestsH
+#ifndef ValueTestsH
+#define ValueTestsH
 //---------------------------------------------------------------------------
 #include "Test.h"
 
@@ -8,11 +8,10 @@ namespace srdev
 {
 	namespace Test
 	{
-		struct BaseTests : public Case
+		struct ValueTests : public Case
 		{
 			virtual TestResult runTest() override;
 		};
 	}
 }
-
 #endif

@@ -30,6 +30,12 @@
     <ClInclude Include="Base\Base.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Base\Value.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Test\ValueTests.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Test\BaseTests.cpp">
@@ -45,6 +51,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Base\Base.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\Value.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Test\ValueTests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

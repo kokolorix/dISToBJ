@@ -41,11 +41,15 @@
 		<Unit filename="Base/Base.cpp" />
 		<Unit filename="Base/Base.h" />
 		<Unit filename="Base/Cast.h" />
+		<Unit filename="Base/Value.cpp" />
+		<Unit filename="Base/Value.h" />
 		<Unit filename="Test/BaseTests.cpp" />
 		<Unit filename="Test/BaseTests.h" />
 		<Unit filename="Test/Test.cpp" />
 		<Unit filename="Test/Test.h" />
 		<Unit filename="Test/TestMain.cpp" />
+		<Unit filename="Test/ValueTests.cpp" />
+		<Unit filename="Test/ValueTests.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />

@@ -131,6 +131,10 @@
             <DependentOn>Base\Base.h</DependentOn>
             <BuildOrder>4</BuildOrder>
         </CppCompile>
+        <CppCompile Include="Base\Value.cpp">
+            <DependentOn>Base\Value.h</DependentOn>
+            <BuildOrder>5</BuildOrder>
+        </CppCompile>
         <PCHCompile Include="Pch\dISToBJPCH1.h">
             <BuildOrder>0</BuildOrder>
             <PCH>true</PCH>
@@ -145,6 +149,10 @@
         </CppCompile>
         <CppCompile Include="Test\TestMain.cpp">
             <BuildOrder>1</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Test\ValueTests.cpp">
+            <DependentOn>Test\ValueTests.h</DependentOn>
+            <BuildOrder>6</BuildOrder>
         </CppCompile>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>

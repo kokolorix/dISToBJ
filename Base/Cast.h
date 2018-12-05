@@ -1,5 +1,4 @@
 //---------------------------------------------------------------------------
-
 #ifndef CastH
 #define CastH
 #include <sstream>
@@ -19,6 +18,7 @@ namespace srdev
 		{
 			inline R operator()(In in) { return static_cast<R>(in); }
 		};
+
 		template <typename In>
 		struct cast_helper<String,In>
 		{
@@ -27,6 +27,27 @@ namespace srdev
 				std::ostringstream os;
 				os << in;
 				return String(os.str());
+			}
+		};
+
+		template<typename R>
+		struct cast_helper<R, String>
+		{
+			inline R operator()(String in)
+			{
+				R r;
+				std::istringstream is(in);
+				is >> r;
+				return r;
+			}
+		};
+
+		template<>
+		struct cast_helper<String, String>
+		{
+			inline String operator()(String in)
+			{
+				return in;
 			}
 		};
 	} // namespace impl
