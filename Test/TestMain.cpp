@@ -1,8 +1,9 @@
-#pragma hdrstop
+//---------------------------------------------------------------------------
 #include "pch.h"
-#pragma argsused
-
+#pragma hdrstop
 #include "Test.h"
+//---------------------------------------------------------------------------
+#pragma argsused
 
 using namespace srdev;
 namespace impl { extern StringMultiMap appArguments; }

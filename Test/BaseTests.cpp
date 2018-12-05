@@ -1,7 +1,6 @@
 //---------------------------------------------------------------------------
-
-#pragma hdrstop
 #include "pch.h"
+#pragma hdrstop
 
 #include "BaseTests.h"
 #include <iostream>
