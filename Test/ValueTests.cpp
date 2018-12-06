@@ -7,6 +7,7 @@
 #include "Value.h"
 // ---------------------------------------------------------------------------
 #pragma package(smart_init)
+
 using namespace srdev;
 
 namespace
@@ -14,7 +15,7 @@ namespace
 	bool test = Test::addTestCase(make_shared<Test::ValueTests>(), "ValueTests");
 }
 
-namespace
+namespace  tst
 {
 	void stackTest()
 	{
@@ -35,7 +36,7 @@ namespace
 		ValuePtr a2e = Value::make(42);
 	}
 }
-
+ using namespace tst;
 srdev::TestResult srdev::Test::ValueTests::runTest()
 {
 	stackTest();

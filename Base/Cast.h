@@ -3,7 +3,6 @@
 #define CastH
 #include <sstream>
 //---------------------------------------------------------------------------
-
 namespace srdev
 {
 	namespace impl
@@ -22,7 +21,7 @@ namespace srdev
 		template <typename In>
 		struct cast_helper<String,In>
 		{
-			inline String operator()(In in) 
+			inline String operator()(In in)
 			{
 				std::ostringstream os;
 				os << in;

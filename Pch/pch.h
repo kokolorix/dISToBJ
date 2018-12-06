@@ -13,4 +13,13 @@
 // TODO: add headers that you want to pre-compile here
 
 #endif
+
+#ifdef __BORLANDC__
+
+#ifdef _WIN32
+#include <tchar.h>
+#endif
+
+#endif
+
 #endif //PCH_H

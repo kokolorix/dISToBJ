@@ -21,7 +21,6 @@ namespace srdev
 		//operator UuId() const;
 	};
 	using ValuePtrVector = std::vector<ValuePtr>;
-
 	class Value : public Base
 	{
 	public:
@@ -44,6 +43,7 @@ namespace srdev
 	private:
 	};
 }
+
 namespace srdev
 {
 	template <typename T>
@@ -154,27 +154,27 @@ namespace srdev
 	template<typename T>
 	inline bool operator < (T x, const Value& y)
 	{
-//		if (auto yv = dynamic_cast<const ValueImpl<T>*>(&y))
-//			return x < yv->getValue();
-//		else
+		if (auto yv = dynamic_cast<const ValueImpl<T>*>(&y))
+			return x < yv->getValue();
+		else
 			throw srdev::ImpossibleCompareException(__func__);
 	}
 
 	template<typename T>
 	inline bool operator > (T x, const Value& y)
 	{
-//		if (auto yv = dynamic_cast<const ValueImpl<T>*>(&y))
-//			return x > yv->getValue();
-//		else
+		if (auto yv = dynamic_cast<const ValueImpl<T>*>(&y))
+			return x > yv->getValue();
+		else
 			throw srdev::ImpossibleCompareException(__func__);
 	}
 
 	template<typename T>
 	inline bool operator == (T x, const Value& y)
 	{
-//		if (auto yv = dynamic_cast<const ValueImpl<T>*>(&y))
-//			return x == yv->getValue();
-//		else
+		if (auto yv = dynamic_cast<const ValueImpl<T>*>(&y))
+			return x == yv->getValue();
+		else
 			throw srdev::ImpossibleCompareException(__func__);
 	}
 	//template<>
@@ -191,33 +191,33 @@ namespace srdev
 	template<typename T>
 	inline bool operator == (const Value& x, T y)
 	{
-//		if (auto xv = dynamic_cast<const ValueImpl<T>*>(&x))
-//			return xv->getValue() == y;
-//		else
+		if (auto xv = dynamic_cast<const ValueImpl<T>*>(&x))
+			return xv->getValue() == y;
+		else
 			throw srdev::ImpossibleCompareException(__func__);
 	}
 	template<>
 	inline bool operator == (const Value& x, const String::value_type* y)
 	{
-//		if (auto xv = dynamic_cast<const ValueImpl<String>*>(&x))
-//			return xv->getValue() == y;
-//		else
+		if (auto xv = dynamic_cast<const ValueImpl<String>*>(&x))
+			return xv->getValue() == y;
+		else
 			throw srdev::ImpossibleCompareException(__func__);
 	}
 	template<typename T>
 	inline bool operator < (const Value& x, T y)
 	{
-//		if (auto xv = dynamic_cast<const ValueImpl<T>*>(&x))
-//			return xv->getValue() < y;
-//		else
+		if (auto xv = dynamic_cast<const ValueImpl<T>*>(&x))
+			return xv->getValue() < y;
+		else
 			throw srdev::ImpossibleCompareException(__func__);
 	}
 	template<typename T>
 	inline bool operator > (const Value& x, T y)
 	{
-//		if (auto xv = dynamic_cast<const ValueImpl<T>*>(&x))
-//			return xv->getValue() > y;
-//		else
+		if (auto xv = dynamic_cast<const ValueImpl<T>*>(&x))
+			return xv->getValue() > y;
+		else
 			throw srdev::ImpossibleCompareException(__func__);
 	}
 }

@@ -1,6 +1,7 @@
 //---------------------------------------------------------------------------
 #include "pch.h"
 #pragma hdrstop
+
 #include "Value.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
@@ -46,30 +47,31 @@ Value& Value::operator=(const Value& rhs)
 
 ValuePtr::operator uint32_t() const
 {
-//	if (auto p = dynamic_pointer_cast<const ValueImpl<uint32_t>>(*this))
-//		return p->getValue();
-//	else if (auto p = dynamic_pointer_cast<const ValueImpl<double>>(*this))
-//		return cast<uint32_t>(p->getValue());
-//	else if (auto p = dynamic_pointer_cast<const ValueImpl<int32_t>>(*this))
-//		return cast<uint32_t>(p->getValue());
-//	else if (auto p = dynamic_pointer_cast<const ValueImpl<String>>(*this))
-//		return cast<uint32_t>(p->getValue());
-//	else
+	if (auto p = dynamic_pointer_cast<const ValueImpl<uint32_t>>(*this))
+		return p->getValue();
+	else if (auto p = dynamic_pointer_cast<const ValueImpl<double>>(*this))
+		return cast<uint32_t>(p->getValue());
+	else if (auto p = dynamic_pointer_cast<const ValueImpl<int32_t>>(*this))
+		return cast<uint32_t>(p->getValue());
+	else if (auto p = dynamic_pointer_cast<const ValueImpl<String>>(*this))
+		return cast<uint32_t>(p->getValue());
+	else
 		throw ImpossibleCastException(__func__);
 }
 
 ValuePtr::operator double() const
 {
-//	if (auto p = dynamic_pointer_cast<const ValueImpl<double>>(*this))
-//		return p->getValue();
-//	else if (auto p = dynamic_pointer_cast<const ValueImpl<int32_t>>(*this))
-//		return cast<double>(p->getValue());
-//	else if (auto p = dynamic_pointer_cast<const ValueImpl<String>>(*this))
-//		return cast<double>(p->getValue());
-//	else
+	if (auto p = dynamic_pointer_cast<const ValueImpl<double>>(*this))
+		return p->getValue();
+	else if (auto p = dynamic_pointer_cast<const ValueImpl<int32_t>>(*this))
+		return cast<double>(p->getValue());
+	else if (auto p = dynamic_pointer_cast<const ValueImpl<String>>(*this))
+		return cast<double>(p->getValue());
+	else
 		throw ImpossibleCastException(__func__);
 }
 
+//
 ValuePtr::operator String() const
 {
 	return (*this) ? (*this)->toString() : String();
@@ -79,3 +81,4 @@ ValuePtr::operator String() const
 //{
 //	throw ImpossibleCastException(__func__);
 //}
+
