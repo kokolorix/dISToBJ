@@ -101,7 +101,7 @@ namespace srdev
 			return make_shared<ValueImpl<void>>();
 		}
 
-		virtual String toString() const
+		virtual String toString() const override
 		{
 			return String();
 		}
@@ -177,16 +177,16 @@ namespace srdev
 		else
 			throw srdev::ImpossibleCompareException(__func__);
 	}
-	//template<>
-	//inline bool operator == (const String& x, const Value& y)
-	//{
-	//	return  x == y.toString();
-	//}
-	//template<>
-	//inline bool operator == (const char* x, const Value& y)
-	//{
-	//	return  String(x) == y;
-	//}
+	template<>
+	inline bool operator == (const String& x, const Value& y)
+	{
+		return  x == y.toString();
+	}
+	template<>
+	inline bool operator == (const char* x, const Value& y)
+	{
+		return  String(x) == y.toString();
+	}
 
 	template<typename T>
 	inline bool operator == (const Value& x, T y)
@@ -231,7 +231,10 @@ namespace srdev
 		{
 			inline String operator()(ValuePtrVector in)
 			{
-				return String();
+				std::ostringstream os;
+				for(auto it = in.begin(); it != in.end(); ++it)
+					os << (it == in.begin() ? cast<String>(*it) : String(" ,") + cast<String>(*it));
+				return String(os.str());
 			}
 		};
 	}

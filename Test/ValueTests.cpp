@@ -27,8 +27,8 @@ namespace  tst
 		assert(a2e == 42);
 		assert(a2e < 43);
 		assert(a2e > 41);
-		// assert("42" == a2e);
-		// String s_a2e = a2e;
+		assert("42" == a2e);
+		String s_a2e = a2e;
 	}
 
 	void ptrTest()
