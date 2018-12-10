@@ -23,7 +23,8 @@
             "args": [
                 "-Wall",
                 "-Wno-unknown-pragmas",
-                "*\\*.cpp",
+                "Base\\*.cpp",
+                "Test\\*.cpp",
                 "-obin\\clang\\dISToBJ.exe",
                 "-v",
                 "-gfull",

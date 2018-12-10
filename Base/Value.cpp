@@ -45,6 +45,20 @@ Value& Value::operator=(const Value& rhs)
 	return *this;
 }
 
+ValuePtr::operator int32_t() const
+{
+	if (auto p = dynamic_pointer_cast<const ValueImpl<int32_t>>(*this))
+		return p->getValue();
+	else if (auto p = dynamic_pointer_cast<const ValueImpl<double>>(*this))
+		return cast<int32_t>(p->getValue());
+	else if (auto p = dynamic_pointer_cast<const ValueImpl<uint32_t>>(*this))
+		return cast<int32_t>(p->getValue());
+	else if (auto p = dynamic_pointer_cast<const ValueImpl<String>>(*this))
+		return cast<int32_t>(p->getValue());
+	else
+		throw ImpossibleCastException(__func__);
+}
+
 ValuePtr::operator uint32_t() const
 {
 	if (auto p = dynamic_pointer_cast<const ValueImpl<uint32_t>>(*this))

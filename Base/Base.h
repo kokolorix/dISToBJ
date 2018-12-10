@@ -5,6 +5,7 @@
 #include <iostream>
 #include <typeinfo>
 #include <memory>
+#include <algorithm>
 #include <functional>
 #include <vector>
 #include <map>
@@ -27,12 +28,12 @@
 */
 namespace srdev
 {
-	using ::std::istringstream;
-	using ::std::ostringstream;
-	using ::std::shared_ptr;
-	using ::std::make_shared;
-	using ::std::dynamic_pointer_cast;
-	using ::std::function;
+	using std::istringstream;
+	using std::ostringstream;
+	using std::shared_ptr;
+	using std::make_shared;
+	using std::dynamic_pointer_cast;
+	using std::function;
 
 	using String = std::string;
 	using StringVector = std::vector<String>;

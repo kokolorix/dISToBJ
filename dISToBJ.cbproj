@@ -140,6 +140,14 @@
             <DependentOn>Base\Base.h</DependentOn>
             <BuildOrder>4</BuildOrder>
         </CppCompile>
+        <CppCompile Include="Base\Object.cpp">
+            <DependentOn>Base\Object.h</DependentOn>
+            <BuildOrder>7</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Base\Property.cpp">
+            <DependentOn>Base\Property.h</DependentOn>
+            <BuildOrder>8</BuildOrder>
+        </CppCompile>
         <CppCompile Include="Base\Value.cpp">
             <DependentOn>Base\Value.h</DependentOn>
             <BuildOrder>5</BuildOrder>
@@ -151,6 +159,10 @@
         <CppCompile Include="Test\BaseTests.cpp">
             <DependentOn>Test\BaseTests.h</DependentOn>
             <BuildOrder>3</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Test\ObjectTests.cpp">
+            <DependentOn>Test\ObjectTests.h</DependentOn>
+            <BuildOrder>9</BuildOrder>
         </CppCompile>
         <CppCompile Include="Test\Test.cpp">
             <DependentOn>Test\Test.h</DependentOn>
@@ -252,9 +264,15 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName=".\Win32\Debug\dISToBJ.exe" Configuration="Debug" Class="ProjectOutput">
+                <DeployFile LocalName=".\Bin\Win32\Debug\dISToBJ.exe" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
                         <RemoteName>dISToBJ.exe</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName=".\Bin\Win32\Debug\dISToBJ.tds" Configuration="Debug" Class="DebugSymbols">
+                    <Platform Name="Win32">
+                        <RemoteName>dISToBJ.tds</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>

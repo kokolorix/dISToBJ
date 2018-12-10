@@ -169,15 +169,21 @@
   <ItemGroup>
     <ClInclude Include="Base\Base.h" />
     <ClInclude Include="Base\Cast.h" />
+    <ClInclude Include="Base\Object.h" />
+    <ClInclude Include="Base\Property.h" />
     <ClInclude Include="Base\Value.h" />
     <ClInclude Include="Pch\pch.h" />
     <ClInclude Include="Test\BaseTests.h" />
+    <ClInclude Include="Test\ObjectTests.h" />
     <ClInclude Include="Test\Test.h" />
     <ClInclude Include="Test\ValueTests.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Base\Base.cpp" />
+    <ClCompile Include="Base\Object.cpp" />
+    <ClCompile Include="Base\Property.cpp" />
     <ClCompile Include="Base\Value.cpp" />
+    <ClCompile Include="Test\ObjectTests.cpp" />
     <ClCompile Include="Test\TestMain.cpp" />
     <ClCompile Include="Pch\pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

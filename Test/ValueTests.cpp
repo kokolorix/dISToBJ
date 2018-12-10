@@ -36,7 +36,8 @@ namespace  tst
 		ValuePtr a2e = Value::make(42);
 	}
 }
- using namespace tst;
+using namespace tst;
+
 srdev::TestResult srdev::Test::ValueTests::runTest()
 {
 	stackTest();
