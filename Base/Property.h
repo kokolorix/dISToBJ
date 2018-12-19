@@ -17,7 +17,7 @@ namespace srdev
 	{
 		using Base = shared_ptr<Property>;
 		using Base::Base;
-		PropertyPtr(const Base& ptr) : Base(ptr) {}
+		PropertyPtr(Base ptr) : Base(ptr) {}
 		PropertyPtr() : Base() {}
 //		PropertyPtr(pair<String, ValuePtr> p);
 		operator ValuePtr () const;
@@ -34,7 +34,7 @@ namespace srdev
 
 		static PropertyPtr make(PropertyPtr p) { return p; }
 		template<class T>
-		static PropertyPtr make(const String& name, T&& value);
+		static PropertyPtr make(const String& name, T value);
 		template<class T>
 		static PropertyPtr make(std::pair<const String, T> p);
 		template<class T>
@@ -53,20 +53,15 @@ namespace srdev
 	};
 
 	template<class T>
-	inline PropertyPtr srdev::Property::make(const String& name, T&& value)
+	inline PropertyPtr srdev::Property::make(const String& name, T value)
 	{
 		return make_shared<Property>(name, Value::make(value));
 	}
-	//template<>
-	//inline PropertyPtr srdev::Property::make(const String& name, ValuePtr& value)
-	//{
-	//	return make_shared<Property>(name, value);
-	//}
-	//template<>
-	//inline PropertyPtr srdev::Property::make(const String& name, ValuePtr&& value)
-	//{
-	//	return make_shared<Property>(name, value);
-	//}
+	template<>
+	inline PropertyPtr srdev::Property::make(const String& name, ValuePtr value)
+	{
+		return make_shared<Property>(name, value);
+	}
 	template<class T>
 	inline PropertyPtr Property::make(std::pair<const String, T> p)
 	{

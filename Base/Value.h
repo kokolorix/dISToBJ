@@ -12,6 +12,7 @@ namespace srdev
 		using Base = shared_ptr<const Value>;
 		using Base::Base;
 		ValuePtr() : Base() {}
+		ValuePtr(Base ptr) : Base(ptr) {}
 		template<typename T>
 		ValuePtr(T v);
 		operator int32_t() const;

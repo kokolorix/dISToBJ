@@ -119,5 +119,9 @@ PropertyPtr Object::findProperty(const String &name)
 	if (it == _properties.end())
 		return PropertyPtr();
 	else
+	{
+		PropertyPtr p = *it;
+      ValuePtr v = p->getValue();
 		return *it;
+	}
 }

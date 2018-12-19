@@ -6,7 +6,7 @@
         {
             "label": "test",
             "type": "shell",
-            "command": "bin\\clang\\dISToBJ.exe",
+            "command": "Bin\\Clang\\dISToBJ.exe",
             "group": {
                 "kind": "test",
                 "isDefault": true
@@ -25,8 +25,8 @@
                 "-Wno-unknown-pragmas",
                 "Base\\*.cpp",
                 "Test\\*.cpp",
-                "-obin\\clang\\dISToBJ.exe",
-                "-v",
+                "-o${workspaceFolder}\\Bin\\Clang\\dISToBJ.exe",
+                // "-v",
                 "-gfull",
                 "-std=c++17",
                 "-IPch",
