@@ -6,6 +6,7 @@
 #include "Base.h"
 #include "Property.h"
 #include <iterator>
+#include "Iterator.h"
 
 namespace srdev
 {
@@ -40,12 +41,12 @@ namespace srdev
 	protected:
 
 	private:
-		PropertyPtrVector _properties;
+		PropertyPtrVector properties_;
 		ValuePtr& findOrCreateValue(const String &name, ValuePtr value = ValuePtr());
 
 		friend struct ObjectPtr;
 		friend struct Result;
-		REDIRECT_STL_CONTAINER(PropertyPtrVector, _properties)
+		REDIRECT_STL_CONTAINER(PropertyPtrVector, properties_)
 	};
 
 	struct ObjectPtr : public shared_ptr<Object>
@@ -55,7 +56,7 @@ namespace srdev
       ObjectPtr(Base ptr) : Base(ptr){}
 		Result operator [] (const String& name);
 		ObjectPtr& operator += (const PropertyPtr& p);
-		REDIRECT_STL_CONTAINER(PropertyPtrVector, (*this)->_properties)
+		REDIRECT_STL_CONTAINER(PropertyPtrVector, (*this)->properties_)
 	};
 	using ObjectValue = ValueImpl<ObjectPtr>;
 
@@ -63,7 +64,7 @@ namespace srdev
 	{
 	public:
 		Result(const String& n, ObjectPtr& o) :_name(n), _object(o) {}
-		Result(const String& n, ObjectPtr& o, ValuePtr r) :_name(n), _object(o), _result(r) {}
+		Result(const String& n, ObjectPtr& o, ValuePtr r) :_name(n), _object(o), result_(r) {}
 		Result(const Result& r) = default;
 		Result(Result&& r) = default;
 
@@ -71,7 +72,7 @@ namespace srdev
 		//IdType _id;
 		String _name;
 		ObjectPtr _object;
-		ValuePtr _result;
+		ValuePtr result_;
 
 	public:
 		Result operator =(ValuePtr r);
@@ -79,10 +80,10 @@ namespace srdev
 		Result operator =(T r);
 		Result operator [] (const String& name);
 		Result operator [] (const String::value_type* name);
-		const Value& operator * () const { return *_result; }
-		ValuePtr operator -> () { return _result; }
-		operator ValuePtr () const { return _result; }
-		operator double() const { return _result; }
+		const Value& operator * () const { return *result_; }
+		ValuePtr operator -> () { return result_; }
+		operator ValuePtr () const { return result_; }
+		operator double() const { return result_; }
 		template<typename T>
 		bool operator == (T y) const;
 	};
@@ -91,7 +92,7 @@ namespace srdev
 	inline ObjectPtr srdev::Object::make(It first, It last)
 	{
 		ObjectPtr obj ( new Object());
-		std::transform(first, last, std::back_inserter(obj->_properties), [](auto& t)
+		std::transform(first, last, std::back_inserter(obj->properties_), [](auto& t)
 		{
 			return Property::make(t);
 		});
@@ -107,30 +108,30 @@ namespace srdev
 	//inline ObjectPtr srdev::Object::make(std::initializer_list<PropertyPtr> properties)
 	//{
 	//	ObjectPtr obj = make_shared<Object>();
-	//	obj->_properties.assign(properties);
+	//	obj->properties_.assign(properties);
 	//	return obj;
 	//}
 
 	template<typename T>
 	Result srdev::Result::operator=(T r)
 	{
-		_result = _object->findOrCreateValue(_name, Value::make(r));
+		result_ = _object->findOrCreateValue(_name, Value::make(r));
 		return *this;
 	}
 
 	template<typename T>
 	inline bool srdev::Result::operator==(T y) const
 	{
-		if (auto x = dynamic_pointer_cast<const ValueImpl<T>>(_result))
+		if (auto x = dynamic_pointer_cast<const ValueImpl<T>>(result_))
 			return x->getValue() == y;
-		return static_cast<T>(_result) == y;
+		return static_cast<T>(result_) == y;
 	}
 	template<>
 	inline bool srdev::Result::operator==(const String::value_type* y) const
 	{
-		if (auto x = dynamic_pointer_cast<const ValueImpl<String>>(_result))
+		if (auto x = dynamic_pointer_cast<const ValueImpl<String>>(result_))
 			return x->getValue() == y;
-		return _result->toString() == y;
+		return result_->toString() == y;
 	}
 
 

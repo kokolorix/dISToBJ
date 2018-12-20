@@ -43,14 +43,14 @@ namespace srdev
 
 	Result Result::operator[](const String& name)
 	{
-		if(const auto p = dynamic_pointer_cast<const VoidValue>(_result))
+		if(const auto p = dynamic_pointer_cast<const VoidValue>(result_))
 		{
 			ObjectPtr obj = Object::make();
-			_result = _object->findOrCreateValue(_name, Value::make(obj));
+			result_ = _object->findOrCreateValue(_name, Value::make(obj));
 			return obj[name];
 		}
 
-		if (const auto p = dynamic_pointer_cast<const ObjectValue>(_result))
+		if (const auto p = dynamic_pointer_cast<const ObjectValue>(result_))
 		{
 			ObjectPtr& obj = const_cast<ObjectPtr&>(p->getValue());
 			if (!obj)
@@ -68,7 +68,7 @@ namespace srdev
 
 	srdev::Result Result::operator=(ValuePtr r)
 	{
-		_result = _object->findOrCreateValue(_name, r);
+		result_ = _object->findOrCreateValue(_name, r);
 		return *this;
 	}
 
@@ -82,14 +82,14 @@ ValuePtr& Object::findOrCreateValue(const String &name, ValuePtr value /*= Value
 	if (!p)
 	{
 		p = Property::make(name, value ? value : Value::make());
-		_properties.push_back(p);
+		properties_.push_back(p);
 	}
 	else
 	{
 		if (value)
-			p->_value = value;
+			p->value_ = value;
 	}
-	return p->_value;
+	return p->value_;
 }
 
 ObjectPtr srdev::Object::make()
@@ -109,14 +109,14 @@ ObjectPtr srdev::Object::make()
 //ObjectPtr Object::make(std::initializer_list<PropertyPtr>properties)
 //{
 //    auto obj = Object::make();
-//    obj->_properties.assign(properties);
+//    obj->properties_.assign(properties);
 //    return obj;
 //}
 //
 PropertyPtr Object::findProperty(const String &name)
 {
-	auto it = std::find_if(_properties.begin(), _properties.end(), [name](PropertyPtr p) { return p->getName() == name; });
-	if (it == _properties.end())
+	auto it = std::find_if(properties_.begin(), properties_.end(), [name](PropertyPtr p) { return p->getName() == name; });
+	if (it == properties_.end())
 		return PropertyPtr();
 	else
 	{

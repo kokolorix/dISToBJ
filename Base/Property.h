@@ -30,7 +30,7 @@ namespace srdev
 		Property();
 		virtual ~Property();
 		Property(const Property& other);
-		Property(const String& name, ValuePtr value) : _name(name), _value(value) {}
+		Property(const String& name, ValuePtr value) : name_(name), value_(value) {}
 
 		static PropertyPtr make(PropertyPtr p) { return p; }
 		template<class T>
@@ -40,14 +40,14 @@ namespace srdev
 		template<class T>
 		static PropertyPtr make(std::pair<const String::value_type*, T> p);
 
-		String getName() const { return _name; }
-		ValuePtr getValue() const { return _value; }
+		String getName() const { return name_; }
+		ValuePtr getValue() const { return value_; }
 
 	protected:
 
 	private:
-		String _name;
-		ValuePtr _value;
+		String name_;
+		ValuePtr value_;
 
 		friend class Object;
 	};

@@ -20,6 +20,14 @@
                 "kind": "build",
                 "isDefault": true
             },
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": true
+            },
             "args": [
                 "-Wall",
                 "-Wno-unknown-pragmas",
@@ -29,9 +37,10 @@
                 // "-v",
                 "-gfull",
                 "-std=c++17",
-                "-IPch",
-                "-IBase",
-                "-ITest",
+                "-I${workspaceFolder}\\Pch",
+                "-I${workspaceFolder}\\Base",
+                "-I${workspaceFolder}\\Test",
+                "-I ",
                 "-IC:\\Program Files\\LLVM\\include",
                 "-LC:\\Program Files\\LLVM\\lib"
             ],
