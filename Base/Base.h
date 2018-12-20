@@ -11,21 +11,6 @@
 #include <map>
 //#include <m>
 //---------------------------------------------------------------------------
-/*! \mainpage A quick start in dISToBJ
- *
- * \section intro_sec Overview
- *
- * The most important constructs.
- *
- * \subsection Globals
- *
- * with srdev::cast it exists a consistent way to cast one type to another.
- *
- * \subsection Classes
- *
- * srdev::Base is the base class of all.
- * srdev::Value is the base of all supported value types.
-*/
 namespace srdev
 {
 	using std::istringstream;
