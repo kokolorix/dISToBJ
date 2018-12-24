@@ -13,13 +13,13 @@
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],
-            "externalConsole": true
+            "externalConsole": false
         },
         {
             "name": "(gdb) Launch",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}\\bin\\Clang\\dISToBJ.exe",
+            "program": "${workspaceFolder}\\bin\\clang\\dISToBJ.exe",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",

@@ -37,11 +37,15 @@
                 // "-v",
                 "-gfull",
                 "-std=c++17",
+                // "-gdwarf",
                 "-I${workspaceFolder}\\Pch",
                 "-I${workspaceFolder}\\Base",
                 "-I${workspaceFolder}\\Test",
                 "-I ",
                 "-IC:\\Program Files\\LLVM\\include",
+                "-ID:\\Projects\\boost_1_69_0",
+                "-Xclang",
+                "-flto-visibility-public-std",
                 "-LC:\\Program Files\\LLVM\\lib"
             ],
             "options": {
