@@ -99,7 +99,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>Pch;Base;Test;D:\Projects\boost_1_69_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>Pch;Base;Test;Serialization;3rdParty;D:\Projects\boost_1_69_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4068</DisableSpecificWarnings>
     </ClCompile>
     <Link>
@@ -117,7 +117,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>Pch;Base;Test;D:\Projects\boost_1_69_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>Pch;Base;Test;Serialization;3rdParty;D:\Projects\boost_1_69_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4068</DisableSpecificWarnings>
     </ClCompile>
     <Link>
@@ -137,7 +137,7 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>Pch;Base;Test;D:\Projects\boost_1_69_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>Pch;Base;Test;Serialization;3rdParty;D:\Projects\boost_1_69_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4068</DisableSpecificWarnings>
     </ClCompile>
     <Link>
@@ -159,7 +159,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>Pch;Base;Test;D:\Projects\boost_1_69_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>Pch;Base;Test;Serialization;3rdParty;D:\Projects\boost_1_69_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4068</DisableSpecificWarnings>
     </ClCompile>
     <Link>
@@ -171,14 +171,22 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="3rdParty\nlohmann\json.hpp" />
+    <ClInclude Include="3rdParty\rapidxml\rapidxml.hpp" />
+    <ClInclude Include="3rdParty\rapidxml\rapidxml_iterators.hpp" />
+    <ClInclude Include="3rdParty\rapidxml\rapidxml_print.hpp" />
+    <ClInclude Include="3rdParty\rapidxml\rapidxml_utils.hpp" />
     <ClInclude Include="Base\Base.h" />
     <ClInclude Include="Base\Cast.h" />
     <ClInclude Include="Base\Object.h" />
     <ClInclude Include="Base\Property.h" />
     <ClInclude Include="Base\Value.h" />
     <ClInclude Include="Pch\pch.h" />
+    <ClInclude Include="Serialization\Json.h" />
+    <ClInclude Include="Serialization\Xml.h" />
     <ClInclude Include="Test\BaseTests.h" />
     <ClInclude Include="Test\ObjectTests.h" />
+    <ClInclude Include="Test\SerializationTests.h" />
     <ClInclude Include="Test\Test.h" />
     <ClInclude Include="Test\ValueTests.h" />
   </ItemGroup>
@@ -187,7 +195,10 @@
     <ClCompile Include="Base\Object.cpp" />
     <ClCompile Include="Base\Property.cpp" />
     <ClCompile Include="Base\Value.cpp" />
+    <ClCompile Include="Serialization\Json.cpp" />
+    <ClCompile Include="Serialization\Xml.cpp" />
     <ClCompile Include="Test\ObjectTests.cpp" />
+    <ClCompile Include="Test\SerializationTests.cpp" />
     <ClCompile Include="Test\TestMain.cpp" />
     <ClCompile Include="Pch\pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

@@ -24,6 +24,8 @@ namespace srdev
 	using VectorOfStringVectors = std::vector<StringVector>;
 	using StringMap = std::map<String, String>;
 	using StringMultiMap = std::multimap<String, String>;
+	
+	using Path = std::string;
 }
 
 namespace srdev

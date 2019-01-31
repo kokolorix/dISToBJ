@@ -53,7 +53,8 @@ namespace srdev
 	{
 		using Base = shared_ptr<Object>;
 		using Base::Base;
-      ObjectPtr(Base ptr) : Base(ptr){}
+		ObjectPtr() : Base(nullptr) {}
+		ObjectPtr(Base ptr) : Base(ptr) {}
 		Result operator [] (const String& name);
 		ObjectPtr& operator += (const PropertyPtr& p);
 		REDIRECT_STL_CONTAINER(PropertyPtrVector, (*this)->properties_)

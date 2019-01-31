@@ -32,6 +32,7 @@
                 "-Wall",
                 "-Wno-unknown-pragmas",
                 "Base\\*.cpp",
+                "Serialization\\*.cpp",
                 "Test\\*.cpp",
                 "-o${workspaceFolder}\\Bin\\Clang\\dISToBJ.exe",
                 // "-v",
@@ -40,9 +41,11 @@
                 // "-gdwarf",
                 "-I${workspaceFolder}\\Pch",
                 "-I${workspaceFolder}\\Base",
+                "-I${workspaceFolder}\\Serialization",
                 "-I${workspaceFolder}\\Test",
                 "-I ",
                 "-IC:\\Program Files\\LLVM\\include",
+                "-I${workspaceFolder}\\3rdParty",
                 "-ID:\\Projects\\boost_1_69_0",
                 "-Xclang",
                 "-flto-visibility-public-std",
@@ -57,8 +60,7 @@
              "problemMatcher": {
                 "owner": "cpp",
                 "fileLocation": [
-                    "relative",
-                    "${workspaceRoot}"
+                    "absolute"
                 ],
                 "pattern": {
                     "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error|fatal error):\\s+(.*)$",
