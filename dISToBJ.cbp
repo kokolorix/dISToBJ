@@ -41,8 +41,15 @@
 			<Add directory="Pch" />
 			<Add directory="Base" />
 			<Add directory="Test" />
+			<Add directory="Serialization" />
+			<Add directory="3rdParty" />
 			<Add directory="D:/Projects/boost_1_69_0" />
 		</Compiler>
+		<Unit filename="3rdParty/nlohmann/json.hpp" />
+		<Unit filename="3rdParty/rapidxml/rapidxml.hpp" />
+		<Unit filename="3rdParty/rapidxml/rapidxml_iterators.hpp" />
+		<Unit filename="3rdParty/rapidxml/rapidxml_print.hpp" />
+		<Unit filename="3rdParty/rapidxml/rapidxml_utils.hpp" />
 		<Unit filename="Base/Base.cpp" />
 		<Unit filename="Base/Base.h" />
 		<Unit filename="Base/Cast.h" />
@@ -52,10 +59,16 @@
 		<Unit filename="Base/Property.h" />
 		<Unit filename="Base/Value.cpp" />
 		<Unit filename="Base/Value.h" />
+		<Unit filename="Serialization/Json.cpp" />
+		<Unit filename="Serialization/Json.h" />
+		<Unit filename="Serialization/Xml.cpp" />
+		<Unit filename="Serialization/Xml.h" />
 		<Unit filename="Test/BaseTests.cpp" />
 		<Unit filename="Test/BaseTests.h" />
 		<Unit filename="Test/ObjectTests.cpp" />
 		<Unit filename="Test/ObjectTests.h" />
+		<Unit filename="Test/SerializationTests.cpp" />
+		<Unit filename="Test/SerializationTests.h" />
 		<Unit filename="Test/Test.cpp" />
 		<Unit filename="Test/Test.h" />
 		<Unit filename="Test/TestMain.cpp" />
