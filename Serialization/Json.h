@@ -1,4 +1,7 @@
-#pragma once
+//---------------------------------------------------------------------------
+#ifndef JsonH
+#define JsonH
+//---------------------------------------------------------------------------
 
 #include "Object.h"
 #pragma warning(push)
@@ -20,3 +23,4 @@ void writeFile(const Path& filePath, ObjectPtr object);
 String writeString(ObjectPtr object);
 }//json
 }//obj
+#endif

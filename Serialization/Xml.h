@@ -1,4 +1,7 @@
-#pragma once
+//---------------------------------------------------------------------------
+#ifndef XmlH
+#define XmlH
+//---------------------------------------------------------------------------
 
 #include "Object.h"
 #include <rapidxml\rapidxml.hpp>
@@ -19,9 +22,10 @@ extern String TEXT_NODE;
 ObjectPtr readXml(const XmlDocumentPtr doc);
 ObjectPtr readXml(const XmlDocument& doc);
 ObjectPtr readFile(const Path& filePath);
-ObjectPtr readString(String& xmlString);
+ObjectPtr readString(String xmlString);
 XmlDocumentPtr writeXml(ObjectPtr object, const String& rootName = "");
 void writeFile(const Path& filePath, ObjectPtr object);
 String writeString(ObjectPtr object);
 }//xml
 }//srdev
+#endif

@@ -19,13 +19,13 @@
 #define _M_AMD64 100
 
 
-#include <boost\date_time.hpp>
+//#include <boost\date_time.hpp>
 
-
-#define __BORLANDC__  __TEMP1__
-#undef  __TEMP1__
-#define __CODEGEARC__  __TEMP2__
-#undef  __TEMP2__
+//
+//#define __BORLANDC__  __TEMP1__
+//#undef  __TEMP1__
+//#define __CODEGEARC__  __TEMP2__
+//#undef  __TEMP2__
 
 #endif
 //---------------------------------------------------------------------------

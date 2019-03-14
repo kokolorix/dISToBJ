@@ -1,4 +1,7 @@
-#pragma once
+//---------------------------------------------------------------------------
+#ifndef SerializationTestsH
+#define SerializationTestsH
+//---------------------------------------------------------------------------
 
 #include "Test.h"
 
@@ -12,3 +15,4 @@ namespace srdev
 		};
 	}
 }
+#endif

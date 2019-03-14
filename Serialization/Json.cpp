@@ -1,8 +1,12 @@
+//---------------------------------------------------------------------------
 #include "pch.h"
+#include <fstream>
+#pragma hdrstop
+
 #include "Json.h"
 #include "Value.h"
-#include <fstream>
-
+//---------------------------------------------------------------------------
+#pragma package(smart_init)
 namespace srdev
 {
 using namespace nlohmann;

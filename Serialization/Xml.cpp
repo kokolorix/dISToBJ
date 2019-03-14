@@ -1,8 +1,11 @@
+//---------------------------------------------------------------------------
 #include "pch.h"
-#include "Json.h"
-#include "Xml.h"
 #include <rapidxml/rapidxml_print.hpp>
 #include <fstream>
+#pragma hdrstop
+
+#include "Json.h"
+#include "Xml.h"
 
 using namespace srdev;
 using namespace rapidxml;
@@ -10,7 +13,8 @@ using namespace rapidxml;
 String srdev::xml::ELEMENT_NAME = "#element_name#";
 String srdev::xml::ROOT_NAME = "root";
 String srdev::xml::TEXT_NODE = "#text_node#";
-
+//---------------------------------------------------------------------------
+#pragma package(smart_init)
 namespace srdev
 {
 bool isDataNode(XmlNode* node)
@@ -23,11 +27,22 @@ bool isDataNode(XmlNode* node)
 		return true;
 	return false;
 }
+String toString(XmlNode* node)
+{
+	String x;
+	print(std::back_inserter(x), *node, 0);
+	return x;
+}
 ObjectPtr objectFromXml(XmlNode* node);
 ValuePtr valueFromXml(XmlNode* node)
 {
 	if (isDataNode(node))
-		return Value::parse(node->value());
+	{
+		String::value_type* val = node->value();
+		String::size_type sze = node->value_size();
+		//node->value(val, sze);
+		return Value::parse(String(val, val + sze));
+	}
 	ObjectPtr o = objectFromXml(node);
 	if (o->empty())
 		return Value::make();
@@ -50,6 +65,7 @@ PropertyPtr propertyFromXml(XmlAttribute* attribute)
 }
 ObjectPtr objectFromXml(XmlNode* node)
 {
+	String x = toString(node);
 	ObjectPtr obj = Object::make();
 
 	for (XmlAttribute*a = node->first_attribute(); a; a = a->next_attribute())
@@ -63,17 +79,17 @@ ObjectPtr objectFromXml(XmlNode* node)
 	}
 	for (XmlNode* n = node->first_node(); n; n = n->next_sibling())
 	{
+		String x = toString(n);
 		PropertyPtr p = obj->findProperty(n->name());
 		if (auto v = dynamic_pointer_cast<const VectorValue>(p ? p->getValue() : ValuePtr()))
 		{
 			ValuePtr value = valueFromXml(n);
 			const_cast<ValuePtrVector&>(v->getValue()).push_back(value);
 		}
-		else if (n->next_sibling(n->name()))
+		else if (n->next_sibling(n->name(), n->name_size()))
 		{
-			auto v = std::make_shared<ValuePtrVector>();// VectorValue::make(());
 			ValuePtr value = valueFromXml(n);
-			v->push_back(value);
+			ValuePtrVector v = {value};
 			PropertyPtr p = Property::make(n->name(), v);
 			obj.push_back(p);
 		}
@@ -193,10 +209,11 @@ ObjectPtr srdev::xml::readXml(const XmlDocument & doc)
 	return obj;
 }
 
-ObjectPtr srdev::xml::readString(String & xmlString)
+srdev::ObjectPtr srdev::xml::readString(String xmlString_)
 {
 	XmlDocumentPtr doc = make_shared<XmlDocument>();
-	doc->parse<0>(const_cast<String::value_type*>(xmlString.c_str()));
+	String xmlString = xmlString_ + " ";
+	doc->parse<rapidxml::parse_default>(const_cast<String::value_type*>(xmlString.c_str()));
 	ObjectPtr obj = readXml(doc);
 	return obj;
 }
