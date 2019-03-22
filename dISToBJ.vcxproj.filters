@@ -87,6 +87,9 @@
     <ClInclude Include="Test\SerializationTests.h">
       <Filter>Tests</Filter>
     </ClInclude>
+    <ClInclude Include="Base\Compare.h">
+      <Filter>Base</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Pch\pch.cpp">

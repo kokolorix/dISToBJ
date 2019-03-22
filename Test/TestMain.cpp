@@ -6,8 +6,10 @@
 #pragma argsused
 
 using namespace srdev;
+namespace srdev
+{
 namespace impl { extern StringMultiMap appArguments; }
-
+}
 int main(int argc, char* argv[])
 {
 	TestResult r = TestResult::Successful;

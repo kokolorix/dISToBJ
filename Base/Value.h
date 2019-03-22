@@ -112,6 +112,8 @@ namespace srdev
 	using BooleanValue = ValueImpl<bool>;
 	using Int32Value = ValueImpl<int32_t>;
 	using UInt32Value = ValueImpl<uint32_t>;
+	using Int64Value = ValueImpl<int64_t>;
+	using UInt64Value = ValueImpl<uint64_t>;
 	using DoubleValue = ValueImpl<double>;
 	using StringValue = ValueImpl<String>;
 	//using UuIdValue = ValueImpl<UuId>;

@@ -6,6 +6,8 @@
 #pragma package(smart_init)
 
 using namespace srdev;
+namespace srdev
+{
 //---------------------------------------------------------------------------
 /*! \mainpage A quick start in dISToBJ
  *
@@ -17,16 +19,24 @@ using namespace srdev;
  *
  * with srdev::cast it exists a consistent way to cast one type to another.
  *
+ * \subsection Namespaces
+ * 
+ * srdev::Test is the namespace where all test are in
+ *
  * \subsection Classes
  *
- * srdev::Base is the base class of all.
- * srdev::Value is the base of all supported value types.
- * srdev::Property modulates a the Property from an srdev::Object
+ * Base is the base class of everything.
+ * 
+ * Value is the base of all supported value types.
+ * 
+ * Property modulates a the Property from an Object
+ * 
+ * \htmlonly
+ * <a href="inherits.html">Go to the graphical class hierarchy</a>
+ * \endhtmlonly
 */
-namespace impl
-{
-	StringMultiMap appArguments;
+namespace impl { StringMultiMap appArguments; }
 }
-const StringMultiMap& srdev::AppArguments = impl::appArguments;
+const StringMultiMap& srdev::AppArguments = srdev::impl::appArguments;
 
 

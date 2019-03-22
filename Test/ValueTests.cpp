@@ -15,7 +15,7 @@ namespace
 	bool test = Test::addTestCase(make_shared<Test::ValueTests>(), "ValueTests");
 }
 
-namespace  tst
+namespace
 {
 	void stackTest()
 	{
@@ -34,13 +34,25 @@ namespace  tst
 	void ptrTest()
 	{
 		ValuePtr a2e = Value::make(42);
+
+	}
+
+	void parseTest()
+	{
+		assert(dynamic_pointer_cast<const Int32Value>(Value::parse("42")));
+		assert(dynamic_pointer_cast<const UInt32Value>(Value::parse("0x2a")));
+		assert(dynamic_pointer_cast<const UInt64Value>(Value::parse("0xfffffffffff")));
+		assert(dynamic_pointer_cast<const Int64Value>(Value::parse("17592186044415")));
+		assert(dynamic_pointer_cast<const BooleanValue>(Value::parse("true")));
+		assert(dynamic_pointer_cast<const DoubleValue>(Value::parse("1.7e+3")));
+		assert(dynamic_pointer_cast<const StringValue>(Value::parse("Lorem Ipsum is simply dummy text of the printing and typesetting.")));
 	}
 }
-using namespace tst;
 
 srdev::TestResult srdev::Test::ValueTests::runTest()
 {
 	stackTest();
 	ptrTest();
+	parseTest();
 	return TestResult::Successful;
 }
