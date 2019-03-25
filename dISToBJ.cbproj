@@ -128,6 +128,9 @@
             <DependentOn>Base\Base.h</DependentOn>
             <BuildOrder>4</BuildOrder>
         </CppCompile>
+        <None Include="Base\Compare.h">
+            <BuildOrder>13</BuildOrder>
+        </None>
         <CppCompile Include="Base\Object.cpp">
             <DependentOn>Base\Object.h</DependentOn>
             <BuildOrder>7</BuildOrder>

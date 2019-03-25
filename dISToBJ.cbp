@@ -53,6 +53,7 @@
 		<Unit filename="Base/Base.cpp" />
 		<Unit filename="Base/Base.h" />
 		<Unit filename="Base/Cast.h" />
+		<Unit filename="Base/Compare.h" />
 		<Unit filename="Base/Object.cpp" />
 		<Unit filename="Base/Object.h" />
 		<Unit filename="Base/Property.cpp" />

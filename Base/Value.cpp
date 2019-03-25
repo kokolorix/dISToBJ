@@ -32,11 +32,11 @@ srdev::ValuePtr Value::parse(const String& s)
 	else if (iequal(s, "false"))
 		return BooleanValue::make(false);
 	else if(isDecNumber(s))
-	{	
+	{
 		ChT* ch;
 		long long i = std::strtoll(s.c_str(), &ch, 10);
-		ptrdiff_t l = std::distance<const ChT*>(s.c_str(), ch);
-		if (l == s.length())
+		auto l = std::distance<const ChT*>(s.c_str(), ch);
+		if (l == static_cast<signed>(s.length()))
 		{
 			l = is_one_of(*s.c_str(), '-', '+') ? l - 1 : l;
 			//if( l <= 10)
@@ -64,8 +64,8 @@ srdev::ValuePtr Value::parse(const String& s)
 	{
 		ChT* ch;
 		unsigned long long i = std::strtoull(s.c_str(), &ch, 16);
-		ptrdiff_t l = std::distance<const ChT*>(s.c_str(), ch);
-		if (l == s.length())
+		auto l = std::distance<const ChT*>(s.c_str(), ch);
+		if (l == static_cast<signed>(s.length()))
 		{
 			if (i > std::numeric_limits<uint32_t>::max())
 				return UInt64Value::make(i);
@@ -77,8 +77,8 @@ srdev::ValuePtr Value::parse(const String& s)
 	{
 		ChT* ch;
 		double d =std::strtod(s.c_str(), &ch);
-		ptrdiff_t l = std::distance<const ChT*>(s.c_str(), ch);
-		if (l == s.length())
+		auto l = std::distance<const ChT*>(s.c_str(), ch);
+		if (l == static_cast<signed>(s.length()))
 			return DoubleValue::make(d);
 	}
 
