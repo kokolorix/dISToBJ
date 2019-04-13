@@ -31,6 +31,9 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
+    <Filter Include="3rdParty\civetweb">
+      <UniqueIdentifier>{7e24b1d2-17eb-4945-a4cc-c3942390c1b4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Pch\pch.h">
@@ -90,6 +93,15 @@
     <ClInclude Include="Base\Compare.h">
       <Filter>Base</Filter>
     </ClInclude>
+    <ClInclude Include="3rdParty\civetweb\CivetServer.h">
+      <Filter>3rdParty\civetweb</Filter>
+    </ClInclude>
+    <ClInclude Include="3rdParty\civetweb\civetweb.h">
+      <Filter>3rdParty\civetweb</Filter>
+    </ClInclude>
+    <ClInclude Include="Test\WebTests.h">
+      <Filter>Tests</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Pch\pch.cpp">
@@ -129,6 +141,15 @@
       <Filter>Serialization</Filter>
     </ClCompile>
     <ClCompile Include="Test\SerializationTests.cpp">
+      <Filter>Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="3rdParty\civetweb\CivetServer.cpp">
+      <Filter>3rdParty\civetweb</Filter>
+    </ClCompile>
+    <ClCompile Include="3rdParty\civetweb\civetweb.c">
+      <Filter>3rdParty\civetweb</Filter>
+    </ClCompile>
+    <ClCompile Include="Test\WebTests.cpp">
       <Filter>Tests</Filter>
     </ClCompile>
   </ItemGroup>

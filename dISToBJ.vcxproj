@@ -171,6 +171,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="3rdParty\civetweb\CivetServer.h" />
+    <ClInclude Include="3rdParty\civetweb\civetweb.h" />
     <ClInclude Include="3rdParty\nlohmann\json.hpp" />
     <ClInclude Include="3rdParty\rapidxml\rapidxml.hpp" />
     <ClInclude Include="3rdParty\rapidxml\rapidxml_iterators.hpp" />
@@ -190,8 +192,17 @@
     <ClInclude Include="Test\SerializationTests.h" />
     <ClInclude Include="Test\Test.h" />
     <ClInclude Include="Test\ValueTests.h" />
+    <ClInclude Include="Test\WebTests.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="3rdParty\civetweb\CivetServer.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="3rdParty\civetweb\civetweb.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="Base\Base.cpp" />
     <ClCompile Include="Base\Object.cpp" />
     <ClCompile Include="Base\Property.cpp" />
@@ -214,6 +225,7 @@
     <ClCompile Include="Test\BaseTests.cpp" />
     <ClCompile Include="Test\Test.cpp" />
     <ClCompile Include="Test\ValueTests.cpp" />
+    <ClCompile Include="Test\WebTests.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
