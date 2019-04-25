@@ -34,6 +34,9 @@
     <Filter Include="3rdParty\civetweb">
       <UniqueIdentifier>{7e24b1d2-17eb-4945-a4cc-c3942390c1b4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="3rdParty\otl">
+      <UniqueIdentifier>{252ce731-c2e3-4a10-bdf1-5251bbc72708}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Pch\pch.h">
@@ -102,6 +105,15 @@
     <ClInclude Include="Test\WebTests.h">
       <Filter>Tests</Filter>
     </ClInclude>
+    <ClInclude Include="3rdParty\otl\otlv4.h">
+      <Filter>3rdParty\otl</Filter>
+    </ClInclude>
+    <ClInclude Include="Serialization\Database.h">
+      <Filter>Serialization</Filter>
+    </ClInclude>
+    <ClInclude Include="Test\DatabaseTests.h">
+      <Filter>Tests</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Pch\pch.cpp">
@@ -150,6 +162,12 @@
       <Filter>3rdParty\civetweb</Filter>
     </ClCompile>
     <ClCompile Include="Test\WebTests.cpp">
+      <Filter>Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="Serialization\Database.cpp">
+      <Filter>Serialization</Filter>
+    </ClCompile>
+    <ClCompile Include="Test\DatabaseTests.cpp">
       <Filter>Tests</Filter>
     </ClCompile>
   </ItemGroup>

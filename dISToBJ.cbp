@@ -45,6 +45,14 @@
 			<Add directory="3rdParty" />
 			<Add directory="D:/Projects/boost_1_69_0" />
 		</Compiler>
+		<Unit filename="3rdParty/civetweb/CivetServer.cpp" />
+		<Unit filename="3rdParty/civetweb/CivetServer.h" />
+		<Unit filename="3rdParty/civetweb/civetweb.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="3rdParty/civetweb/civetweb.h" />
+		<Unit filename="3rdParty/civetweb/handle_form.inl" />
+		<Unit filename="3rdParty/civetweb/md5.inl" />
 		<Unit filename="3rdParty/nlohmann/json.hpp" />
 		<Unit filename="3rdParty/rapidxml/rapidxml.hpp" />
 		<Unit filename="3rdParty/rapidxml/rapidxml_iterators.hpp" />
@@ -75,6 +83,8 @@
 		<Unit filename="Test/TestMain.cpp" />
 		<Unit filename="Test/ValueTests.cpp" />
 		<Unit filename="Test/ValueTests.h" />
+		<Unit filename="Test/WebTests.cpp" />
+		<Unit filename="Test/WebTests.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />

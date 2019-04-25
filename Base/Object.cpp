@@ -6,6 +6,10 @@
 #include "Object.h"
 namespace srdev
 {
+	/**
+	 * @class Object
+	 * @diafile Object.dia "Object"
+	 */
 
 	Object::Object()
 	{

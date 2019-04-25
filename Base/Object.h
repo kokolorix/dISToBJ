@@ -55,6 +55,16 @@ namespace srdev
 		using Base::Base;
 		ObjectPtr() : Base(nullptr) {}
 		ObjectPtr(Base ptr) : Base(ptr) {}
+		/**
+		 * @brief 
+		 * \code {.cpp}
+		 * ObjectPtr obj;
+		 * obj["hallo"] = "Welt!";
+		 * ValuePtr val = obj["hallo"];
+		 * \endcode
+		 * @param name 
+		 * @return Result 
+		 */
 		Result operator [] (const String& name);
 		ObjectPtr& operator += (const PropertyPtr& p);
 		REDIRECT_STL_CONTAINER(PropertyPtrVector, (*this)->properties_)
