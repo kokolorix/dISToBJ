@@ -15,6 +15,8 @@ namespace srdev
 		ValuePtr(Base ptr) : Base(ptr) {}
 		template<typename T>
 		ValuePtr(T v);
+		//template<>
+		//ValuePtr(const String::value_type* v);
 		operator int32_t() const;
 		operator uint32_t() const;
 		operator double() const;
@@ -138,10 +140,10 @@ namespace srdev
 	inline ValuePtr::ValuePtr(T v) : Base(Value::make(v))
 	{
 	}
-	template<>
-	inline ValuePtr::ValuePtr(const String::value_type* v) : Base(Value::make(v))
-	{
-	}
+	//template<>
+	//inline ValuePtr::ValuePtr(const String::value_type* v) : Base(Value::make(v))
+	//{
+	//}
 
 	inline bool operator < (ValuePtr x, ValuePtr y)
 	{
@@ -152,6 +154,11 @@ namespace srdev
 	{
 		bool result = x.get() == y.get() || (x.get() && y.get() && !(*x < *y) && !(*y < *x));
 		return result;
+	}
+
+	inline bool operator < (const Value& x, const Value& y)
+	{
+			return x < y;
 	}
 
 	template<typename T>
