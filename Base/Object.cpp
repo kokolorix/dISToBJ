@@ -50,7 +50,7 @@ namespace srdev
 		if(const auto p = dynamic_pointer_cast<const VoidValue>(result_))
 		{
 			ObjectPtr obj = Object::make();
-			result_ = _object->findOrCreateValue(_name, Value::make(obj));
+			result_ = object_->findOrCreateValue(name_, Value::make(obj));
 			return obj[name];
 		}
 
@@ -72,7 +72,7 @@ namespace srdev
 
 	srdev::Result Result::operator=(ValuePtr r)
 	{
-		result_ = _object->findOrCreateValue(_name, r);
+		result_ = object_->findOrCreateValue(name_, r);
 		return *this;
 	}
 

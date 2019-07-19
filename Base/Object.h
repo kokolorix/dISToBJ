@@ -74,15 +74,15 @@ namespace srdev
 	struct Result
 	{
 	public:
-		Result(const String& n, ObjectPtr& o) :_name(n), _object(o) {}
-		Result(const String& n, ObjectPtr& o, ValuePtr r) :_name(n), _object(o), result_(r) {}
+		Result(const String& n, ObjectPtr& o) :name_(n), object_(o) {}
+		Result(const String& n, ObjectPtr& o, ValuePtr r) :name_(n), object_(o), result_(r) {}
 		Result(const Result& r) = default;
 		Result(Result&& r) = default;
 
 	private:
 		//IdType _id;
-		String _name;
-		ObjectPtr _object;
+		String name_;
+		ObjectPtr object_;
 		ValuePtr result_;
 
 	public:
@@ -126,7 +126,7 @@ namespace srdev
 	template<typename T>
 	Result srdev::Result::operator=(T r)
 	{
-		result_ = _object->findOrCreateValue(_name, Value::make(r));
+		result_ = object_->findOrCreateValue(name_, Value::make(r));
 		return *this;
 	}
 

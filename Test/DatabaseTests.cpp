@@ -1,7 +1,8 @@
 //---------------------------------------------------------------------------
-#define _CRT_SECURE_NO_WARNINGS
 #include "pch.h"
 #include <ctime>
+#include <stdlib.h>
+#include <stdio.h>
 #pragma hdrstop
 
 #include "DatabaseTests.h"
@@ -12,10 +13,10 @@ using std::cerr;
 using std::cout;
 using std::endl;
 
-#include <stdlib.h>
 
 #define OTL_ODBC // Compile OTL 4.0/ODBC
 // #define OTL_ODBC_UNIX // uncomment this line if UnixODBC is used
+#define OTL_STL // Turn on STL features
 #include <otl/otlv4.h> // include the OTL 4.0 header file
 
 
@@ -28,7 +29,9 @@ namespace
 {
 	void testSQLite();
 	void testMSSQL();
+	void TestTable(otl_connect& db);
 
+	void testReadTables();
 }
 
 srdev::TestResult srdev::Test::DatabaseTests::runTest()
@@ -36,10 +39,13 @@ srdev::TestResult srdev::Test::DatabaseTests::runTest()
 	testSQLite();
 	testMSSQL();
 
+	testReadTables();
+
 	return TestResult::Successful;
 }
 namespace
 {
+
 	void testSQLite()
 	{
 		otl_connect db; // connect object
@@ -47,57 +53,9 @@ namespace
 		try {
 
 			db.rlogon("Driver={SQLite3 ODBC Driver};database=testSQLite.db3");
-			//otl_cursor::direct_exec(db, "SELECT name FROM sqlite_master WHERE(type = 'table')");
+			otl_cursor::direct_exec(db, "SELECT name FROM sqlite_master WHERE(type = 'table')");
 
-			otl_cursor::direct_exec
-			(
-				db,
-				"drop table test_tab",
-				otl_exception::disabled // disable OTL exceptions
-			); // drop table
-
-			otl_cursor::direct_exec
-			(
-				db,
-				"create table test_tab(f1 int, f2 varchar(30), f3 varchar(30))"
-			);  // create table
-
-			otl_stream
-				o(50, // stream buffer size
-					"insert into test_tab values(:f1<int>,:f2<char[31]>,:f3<char[31]>)",
-					// SQL statement
-					db  // connect object
-				);
-			char tmp[32];
-			for (int i = 1; i <= 100; ++i) {
-				sprintf_s(tmp, "Name%d", i);
-				std::time_t result = std::time(nullptr);
-				o << i << tmp << std::asctime(std::localtime(&result));
-			}
-			otl_stream i(50, // buffer size may be > 1
-				"select * from test_tab "
-				"where f1>=:f11<int> "
-				"  and f1<=:f12<int>*2",
-				// SELECT statement
-				db // connect object
-			);
-			// create select stream
-
-			int f1;
-			char f2[31];
-			char f3[31];
-
-			i << 8 << 8; // Writing input values into the stream
-			while (!i.eof()) { // while not end-of-data
-				i >> f1;
-				cout << "f1=" << f1 << ", f2=";
-				i >> f2; i >> f3;
-				if (i.is_null())
-					cout << "NULL";
-				else
-					cout << f2;
-				cout << endl;
-			}
+			TestTable(db);
 		}
 
 		catch (otl_exception & p) { // intercept OTL exceptions
@@ -110,7 +68,7 @@ namespace
 		//db.commit();
 		//db.
 
-		db.logoff(); // disconnect from the database
+//		db.logoff(); // disconnect from the database
 	}
 
 	void testMSSQL()
@@ -118,14 +76,9 @@ namespace
 		otl_connect db; // connect object
 		otl_connect::otl_initialize(); // initialize ODBC environment
 		try {
-			db.rlogon("Driver={SQL Server};server=.\mssql;trusted_connection=Yes;app=Microsoft® Visual Studio®;wsid=VM-02;database=master");
-			otl_stream dbs(10, "SELECT name FROM databases WHERE(name = :f1<varchar_long>)", db);
-			dbs << "testMSSQL";
-			if (dbs.eof())
-			{
-				otl_cursor::direct_exec(db, "CREATE DATABASE testMSSQL");
-			}
-
+			db.rlogon("Driver={SQL Server};server=.;trusted_connection=Yes;;database=testMSSQL");
+	
+			TestTable(db);
 		}
 		catch (otl_exception & p) { // intercept OTL exceptions
 			cerr << p.msg << endl; // print out error message
@@ -134,4 +87,97 @@ namespace
 			cerr << p.var_info << endl; // print out the variable that caused the error
 		}
 	}
+
+	void TestTable(otl_connect& db)
+	{
+		otl_cursor::direct_exec
+		(
+			db,
+			"drop table test_tab",
+			otl_exception::disabled // disable OTL exceptions
+		); // drop table
+
+		otl_cursor::direct_exec
+		(
+			db,
+			"create table test_tab(f1 int, f2 varchar(30), f3 varchar(30))"
+		);  // create table
+
+		otl_stream
+			o(50, // stream buffer size
+				"insert into test_tab values(:f1<int>,:f2<char[31]>,:f3<char[31]>)",
+				// SQL statement
+				db  // connect object
+			);
+		char tmp[32];
+		for (int i = 1; i <= 100; ++i) {
+			sprintf(tmp, "Name%d", i);
+			std::time_t result = std::time(nullptr);
+			o << i << tmp << std::asctime(std::localtime(&result));
+		}
+		otl_stream i(50, // buffer size may be > 1
+			"select * from test_tab "
+			"where f1>=:f11<int> "
+			"  and f1<=:f12<int>*2",
+			// SELECT statement
+			db // connect object
+		);
+		// create select stream
+
+		int f1;
+		char f2[31];
+		char f3[31];
+
+		i << 8 << 8; // Writing input values into the stream
+		while (!i.eof()) { // while not end-of-data
+			i >> f1;
+			cout << "f1=" << f1 << ", f2=";
+			i >> f2; i >> f3;
+			if (i.is_null())
+				cout << "NULL";
+			else
+				cout << f2;
+			cout << endl;
+		}
+	}
+
+	struct table_info
+	{
+		String tableName, columnName;
+		using input_iterator = otl_input_iterator<table_info, ptrdiff_t>;
+	};
+	// redefined operator>> for reading row& from otl_stream
+	otl_stream& operator>>(otl_stream& s, table_info& row)
+	{
+		s >> row.tableName >> row.columnName;
+		return s;
+	}
+
+	void testReadTables()
+	{
+		otl_connect db; // connect object
+		otl_connect::otl_initialize(); // initialize ODBC environment
+
+		db.rlogon("Driver={SQLite3 ODBC Driver};database=big_test.db3");
+		otl_stream inputStream(50,
+			"SELECT m.name as tableName,\n"
+			"p.name as columnName\n"
+			"FROM sqlite_master m\n"
+			"left outer join pragma_table_info((m.name)) p\n"
+			"on m.name <> p.name\n"
+			"where m.type = 'table'\n"
+			"order by tableName, columnName\n",
+			db
+		);
+
+	cout << "table\tcolumn" << std::endl;
+	table_info::input_iterator begin(inputStream), end;
+		for (table_info::input_iterator it = begin; it != end; ++it)
+		{
+			const table_info& ti = *it;
+			cout << ti.tableName << "\t" << ti.columnName << std::endl;
+		}
+
+	}
+
 }

@@ -16,7 +16,7 @@
 					<Add directory="Test" />
 				</Compiler>
 				<Linker>
-					<Add library="D:/Projects/boost_1_69_0/bin/win32/gcc/debug/lib/libboost_date_time-mgw51-mt-d-x32-1_69.a" />
+					<Add library="ws2_32" />
 				</Linker>
 			</Target>
 			<Target title="Release">
@@ -29,7 +29,7 @@
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
-					<Add library="../boost_1_69_0/bin/win32/gcc/release/lib/libboost_date_time-mgw51-mt-x32-1_69.a" />
+					<Add library="ws2_32.lib" />
 				</Linker>
 			</Target>
 		</Build>
@@ -43,7 +43,7 @@
 			<Add directory="Test" />
 			<Add directory="Serialization" />
 			<Add directory="3rdParty" />
-			<Add directory="D:/Projects/boost_1_69_0" />
+			<Add directory="D:/Projects/boost_1_68_0" />
 		</Compiler>
 		<Unit filename="3rdParty/civetweb/CivetServer.cpp" />
 		<Unit filename="3rdParty/civetweb/CivetServer.h" />
@@ -54,6 +54,7 @@
 		<Unit filename="3rdParty/civetweb/handle_form.inl" />
 		<Unit filename="3rdParty/civetweb/md5.inl" />
 		<Unit filename="3rdParty/nlohmann/json.hpp" />
+		<Unit filename="3rdParty/otl/otlv4.h" />
 		<Unit filename="3rdParty/rapidxml/rapidxml.hpp" />
 		<Unit filename="3rdParty/rapidxml/rapidxml_iterators.hpp" />
 		<Unit filename="3rdParty/rapidxml/rapidxml_print.hpp" />
@@ -68,12 +69,16 @@
 		<Unit filename="Base/Property.h" />
 		<Unit filename="Base/Value.cpp" />
 		<Unit filename="Base/Value.h" />
+		<Unit filename="Serialization/Database.cpp" />
+		<Unit filename="Serialization/Database.h" />
 		<Unit filename="Serialization/Json.cpp" />
 		<Unit filename="Serialization/Json.h" />
 		<Unit filename="Serialization/Xml.cpp" />
 		<Unit filename="Serialization/Xml.h" />
 		<Unit filename="Test/BaseTests.cpp" />
 		<Unit filename="Test/BaseTests.h" />
+		<Unit filename="Test/DatabaseTests.cpp" />
+		<Unit filename="Test/DatabaseTests.h" />
 		<Unit filename="Test/ObjectTests.cpp" />
 		<Unit filename="Test/ObjectTests.h" />
 		<Unit filename="Test/SerializationTests.cpp" />

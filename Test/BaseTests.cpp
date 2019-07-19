@@ -6,6 +6,8 @@
 #include <iostream>
 #include <chrono>
 #include <thread>
+//#include <boost\multi_index_container.hpp>
+#include <boost\algorithm\string.hpp>
 
 #ifdef __BORLANDC__
 
