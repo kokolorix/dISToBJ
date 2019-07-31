@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -18,12 +18,36 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Test\BaseTests.cpp" />
+    <ClCompile Include="..\..\Test\DatabaseTests.cpp" />
+    <ClCompile Include="..\..\Test\ObjectTests.cpp" />
+    <ClCompile Include="..\..\Test\SerializationTests.cpp" />
+    <ClCompile Include="..\..\Test\Test.cpp" />
+    <ClCompile Include="..\..\Test\TestApp.cpp" />
+    <ClCompile Include="..\..\Test\TraitsTests.cpp" />
+    <ClCompile Include="..\..\Test\ValueTests.cpp" />
+    <ClCompile Include="..\..\Test\WebTests.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Test\BaseTests.h" />
+    <ClInclude Include="..\..\Test\DatabaseTests.h" />
+    <ClInclude Include="..\..\Test\ObjectTests.h" />
+    <ClInclude Include="..\..\Test\SerializationTests.h" />
+    <ClInclude Include="..\..\Test\Test.h" />
+    <ClInclude Include="..\..\Test\TraitsTests.h" />
+    <ClInclude Include="..\..\Test\ValueTests.h" />
+    <ClInclude Include="..\..\Test\WebTests.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\Test\testSQLite.db3" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
-    <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{AC1CDE24-1567-44C1-95CD-3E78C11F632F}</ProjectGuid>
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <ProjectGuid>{10A588CD-0284-4E00-B09D-BFDE274C3B76}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>dISToBJ</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <RootNamespace>Test</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -56,6 +80,7 @@
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
   <ImportGroup Label="Shared">
+    <Import Project="..\dISToBJ\dISToBJ.vcxitems" Label="Shared" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -72,72 +97,62 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>$(SolutionDir)Bin\$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>$(ProjectDir)Obj\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>$(SolutionDir)Bin\$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>$(ProjectDir)Obj\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(SolutionDir)Bin\$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>$(ProjectDir)Obj\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(SolutionDir)Bin\$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>$(ProjectDir)Obj\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>Pch;Base;Test;Serialization;3rdParty;D:\Projects\boost_1_68_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\Pch;..\..\Base;..\..\System;..\..\Traits;..\..\Test;..\..\Serialization;..\..\3rdParty;..\..\..\boost_1_70_0;%(AdditionalIncludeDirectories);$(MSBuildThisFileDirectory)</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4068</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>D:\Projects\boost_1_68_0\bin\win32\msvc-14.1\debug\lib</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>Pch;Base;Test;Serialization;3rdParty;D:\Projects\boost_1_68_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\Pch;..\..\Base;..\..\System;..\..\Traits;..\..\Test;..\..\Serialization;..\..\3rdParty;..\..\..\boost_1_70_0;%(AdditionalIncludeDirectories);$(MSBuildThisFileDirectory)</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4068</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>D:\Projects\boost_1_68_0\bin\win64\msvc-14.1\debug\lib</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>Pch;Base;Test;Serialization;3rdParty;D:\Projects\boost_1_68_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\Pch;..\..\Base;..\..\System;..\..\Traits;..\..\Test;..\..\Serialization;..\..\3rdParty;..\..\..\boost_1_70_0;%(AdditionalIncludeDirectories);$(MSBuildThisFileDirectory)</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4068</DisableSpecificWarnings>
     </ClCompile>
     <Link>
@@ -145,21 +160,20 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>D:\Projects\boost_1_68_0\bin\win32\msvc-14.1\debug\lib</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>Pch;Base;Test;Serialization;3rdParty;D:\Projects\boost_1_68_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\Pch;..\..\Base;..\..\System;..\..\Traits;..\..\Test;..\..\Serialization;..\..\3rdParty;..\..\..\boost_1_70_0;%(AdditionalIncludeDirectories);$(MSBuildThisFileDirectory)</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4068</DisableSpecificWarnings>
     </ClCompile>
     <Link>
@@ -167,71 +181,8 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>D:\Projects\boost_1_68_0\bin\win64\msvc-14.1\debug\lib</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClInclude Include="3rdParty\civetweb\CivetServer.h" />
-    <ClInclude Include="3rdParty\civetweb\civetweb.h" />
-    <ClInclude Include="3rdParty\nlohmann\json.hpp" />
-    <ClInclude Include="3rdParty\otl\otlv4.h" />
-    <ClInclude Include="3rdParty\rapidxml\rapidxml.hpp" />
-    <ClInclude Include="3rdParty\rapidxml\rapidxml_iterators.hpp" />
-    <ClInclude Include="3rdParty\rapidxml\rapidxml_print.hpp" />
-    <ClInclude Include="3rdParty\rapidxml\rapidxml_utils.hpp" />
-    <ClInclude Include="Base\Base.h" />
-    <ClInclude Include="Base\Cast.h" />
-    <ClInclude Include="Base\Compare.h" />
-    <ClInclude Include="Base\Object.h" />
-    <ClInclude Include="Base\Property.h" />
-    <ClInclude Include="Base\Value.h" />
-    <ClInclude Include="Pch\pch.h" />
-    <ClInclude Include="Serialization\Database.h" />
-    <ClInclude Include="Serialization\Json.h" />
-    <ClInclude Include="Serialization\Xml.h" />
-    <ClInclude Include="Test\BaseTests.h" />
-    <ClInclude Include="Test\DatabaseTests.h" />
-    <ClInclude Include="Test\ObjectTests.h" />
-    <ClInclude Include="Test\SerializationTests.h" />
-    <ClInclude Include="Test\Test.h" />
-    <ClInclude Include="Test\ValueTests.h" />
-    <ClInclude Include="Test\WebTests.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="3rdParty\civetweb\CivetServer.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="3rdParty\civetweb\civetweb.c">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="Base\Base.cpp" />
-    <ClCompile Include="Base\Object.cpp" />
-    <ClCompile Include="Base\Property.cpp" />
-    <ClCompile Include="Base\Value.cpp" />
-    <ClCompile Include="Serialization\Database.cpp" />
-    <ClCompile Include="Serialization\Json.cpp" />
-    <ClCompile Include="Serialization\Xml.cpp" />
-    <ClCompile Include="Test\DatabaseTests.cpp" />
-    <ClCompile Include="Test\ObjectTests.cpp" />
-    <ClCompile Include="Test\SerializationTests.cpp" />
-    <ClCompile Include="Test\TestMain.cpp" />
-    <ClCompile Include="Pch\pch.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">pch.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">pch.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">pch.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">pch.h</PrecompiledHeaderFile>
-    </ClCompile>
-    <ClCompile Include="Test\BaseTests.cpp" />
-    <ClCompile Include="Test\Test.cpp" />
-    <ClCompile Include="Test\ValueTests.cpp" />
-    <ClCompile Include="Test\WebTests.cpp" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

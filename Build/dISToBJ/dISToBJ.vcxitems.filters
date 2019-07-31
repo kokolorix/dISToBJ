@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Base">
+      <UniqueIdentifier>{a90d5602-1527-4822-8918-9584d5006c1c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Serialization">
+      <UniqueIdentifier>{f9462074-e085-44cd-a197-ab2e611bd7e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3rdParty">
+      <UniqueIdentifier>{02f91564-bd0f-4f57-87e8-248ec19702e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pch">
+      <UniqueIdentifier>{ff5673fa-9ce9-480e-a812-5a588dd2ca35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System">
+      <UniqueIdentifier>{963344c5-28da-449c-b635-c3b9bd7c1c51}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Traits">
+      <UniqueIdentifier>{e329bdeb-601e-476a-872f-19ab492fa5bb}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Base\Base.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Base\Object.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Base\Property.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Serialization\Database.cpp">
+      <Filter>Serialization</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Serialization\Json.cpp">
+      <Filter>Serialization</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Serialization\Xml.cpp">
+      <Filter>Serialization</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\3rdParty\civetweb\CivetServer.cpp">
+      <Filter>3rdParty</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\3rdParty\civetweb\civetweb.c">
+      <Filter>3rdParty</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Pch\pch.cpp">
+      <Filter>Pch</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\System\ObjectRepository.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Base\Condition.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\System\ObjectPersistence.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Base\Value.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Base\Base.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Base\Cast.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Base\Compare.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Base\Iterator.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Base\Object.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Base\Property.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Base\Value.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Serialization\Database.h">
+      <Filter>Serialization</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Serialization\Json.h">
+      <Filter>Serialization</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Serialization\Xml.h">
+      <Filter>Serialization</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\3rdParty\otl\otlv4.h">
+      <Filter>3rdParty</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\3rdParty\rapidxml\rapidxml_utils.hpp">
+      <Filter>3rdParty</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\3rdParty\rapidxml\rapidxml_iterators.hpp">
+      <Filter>3rdParty</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\3rdParty\rapidxml\rapidxml_print.hpp">
+      <Filter>3rdParty</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\3rdParty\rapidxml\rapidxml.hpp">
+      <Filter>3rdParty</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\3rdParty\nlohmann\json.hpp">
+      <Filter>3rdParty</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\3rdParty\civetweb\civetweb.h">
+      <Filter>3rdParty</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\3rdParty\civetweb\CivetServer.h">
+      <Filter>3rdParty</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Pch\pch.h">
+      <Filter>Pch</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\System\ObjectRepository.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Base\Condition.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\System\ObjectPersistence.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Traits\Traits.h">
+      <Filter>Traits</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Traits\BaseTraits.h">
+      <Filter>Traits</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Xsd Include="$(MSBuildThisFileDirectory)..\..\Traits\Object.xsd">
+      <Filter>Traits</Filter>
+    </Xsd>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="$(MSBuildThisFileDirectory)..\..\Traits\ObjectTraits.xslt">
+      <Filter>Traits</Filter>
+    </Xml>
+    <Xml Include="$(MSBuildThisFileDirectory)..\..\Traits\BaseClass.xml">
+      <Filter>Traits</Filter>
+    </Xml>
+  </ItemGroup>
+</Project>

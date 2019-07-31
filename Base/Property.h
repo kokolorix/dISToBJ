@@ -43,6 +43,8 @@ namespace srdev
 		String getName() const { return name_; }
 		ValuePtr getValue() const { return value_; }
 
+		void setValue(ValuePtr value) { value_ = value; }
+
 	protected:
 
 	private:

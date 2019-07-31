@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Label="Globals">
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <ItemsProjectGuid>{c47215a6-648e-4101-a2c8-d2d3d281d538}</ItemsProjectGuid>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);$(MSBuildThisFileDirectory)</AdditionalIncludeDirectories>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ProjectCapability Include="SourceItemsFromImports" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\3rdParty\civetweb\CivetServer.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\3rdParty\civetweb\civetweb.c" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Base\Base.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Base\Condition.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Base\Object.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Base\Property.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Base\Value.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Pch\pch.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Serialization\Database.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Serialization\Json.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Serialization\Xml.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\System\ObjectPersistence.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\System\ObjectRepository.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\3rdParty\civetweb\CivetServer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\3rdParty\civetweb\civetweb.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\3rdParty\nlohmann\json.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\3rdParty\otl\otlv4.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\3rdParty\rapidxml\rapidxml.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\3rdParty\rapidxml\rapidxml_iterators.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\3rdParty\rapidxml\rapidxml_print.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\3rdParty\rapidxml\rapidxml_utils.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Base\Base.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Base\Cast.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Base\Compare.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Base\Condition.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Base\Iterator.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Base\Object.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Base\Property.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Base\Value.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Pch\pch.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Serialization\Database.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Serialization\Json.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Serialization\Xml.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\System\ObjectPersistence.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\System\ObjectRepository.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Traits\BaseTraits.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Traits\Traits.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Xsd Include="$(MSBuildThisFileDirectory)..\..\Traits\Object.xsd">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </Xsd>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="$(MSBuildThisFileDirectory)..\..\Traits\BaseClass.xml" />
+    <Xml Include="$(MSBuildThisFileDirectory)..\..\Traits\ObjectTraits.xslt" />
+  </ItemGroup>
+</Project>

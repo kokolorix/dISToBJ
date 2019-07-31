@@ -11,7 +11,7 @@ namespace srdev
 	 * @diafile Object.dia "Object"
 	 */
 
-	Object::Object()
+	Object::Object() : status_(0), objectId_(generateNullId())
 	{
 		//ctor
 	}
@@ -91,15 +91,27 @@ ValuePtr& Object::findOrCreateValue(const String &name, ValuePtr value /*= Value
 	else
 	{
 		if (value)
-			p->value_ = value;
+			p->setValue(value);
 	}
 	return p->value_;
 }
 
-ObjectPtr srdev::Object::make()
+srdev::ObjectPtr srdev::Object::make(UuId typeId /*= generateNullId()*/, UuId objectId /*= generateNullId()*/)
 {
 	auto obj = make_shared<Object>();
+	obj->typeId_ = typeId;
+
+	if (objectId == generateNullId())
+		obj->objectId_ = generateId();
+	else
+		obj->objectId_ = objectId;
+
 	return obj;
+}
+
+srdev::PropertyPtr srdev::Object::getProperty(size_t index)
+{
+	return properties_.at(index);
 }
 
 //srdev::ObjectPtr srdev::Object::make(std::initializer_list<std::pair<String, ValuePtr>> properties)

@@ -52,7 +52,7 @@ namespace
 		otl_connect::otl_initialize(); // initialize ODBC environment
 		try {
 
-			db.rlogon("Driver={SQLite3 ODBC Driver};database=testSQLite.db3");
+			db.rlogon("Driver={SQLite3 ODBC Driver};database=Test/testSQLite.db3");
 			otl_cursor::direct_exec(db, "SELECT name FROM sqlite_master WHERE(type = 'table')");
 
 			TestTable(db);
@@ -143,13 +143,14 @@ namespace
 
 	struct table_info
 	{
-		String tableName, columnName;
+		String tableName, columnName, columnType, foreignKeyTable, foreignKeyColumn;
 		using input_iterator = otl_input_iterator<table_info, ptrdiff_t>;
 	};
+	using table_info_vector = std::vector<table_info>;
 	// redefined operator>> for reading row& from otl_stream
 	otl_stream& operator>>(otl_stream& s, table_info& row)
 	{
-		s >> row.tableName >> row.columnName;
+		s >> row.tableName >> row.columnName >> row.columnType >> row.foreignKeyTable >> row.foreignKeyColumn;
 		return s;
 	}
 
@@ -157,27 +158,25 @@ namespace
 	{
 		otl_connect db; // connect object
 		otl_connect::otl_initialize(); // initialize ODBC environment
-
-		db.rlogon("Driver={SQLite3 ODBC Driver};database=big_test.db3");
-		otl_stream inputStream(50,
-			"SELECT m.name as tableName,\n"
-			"p.name as columnName\n"
-			"FROM sqlite_master m\n"
-			"left outer join pragma_table_info((m.name)) p\n"
-			"on m.name <> p.name\n"
-			"where m.type = 'table'\n"
-			"order by tableName, columnName\n",
-			db
-		);
-
-	cout << "table\tcolumn" << std::endl;
-	table_info::input_iterator begin(inputStream), end;
-		for (table_info::input_iterator it = begin; it != end; ++it)
-		{
-			const table_info& ti = *it;
-			cout << ti.tableName << "\t" << ti.columnName << std::endl;
-		}
-
+		String dbConnectionString = "Driver={SQLite3 ODBC Driver};database=Test/testSQLite-Objects.db3";
+		String dbQuery =
+			"SELECT t.name AS tableName, c.name AS columnName, c.type AS columnType, c.[table] AS foreignKeyTable, c.[to] AS foreignKeyColumn "
+			" FROM sqlite_master t "
+			"       LEFT JOIN "
+			"       ( "
+			"           SELECT DISTINCT ti.name, ti.type, fk.[table], fk.[to] FROM (  SELECT *  FROM pragma_table_info('value')  ) ti "
+			"                  LEFT JOIN "
+			"                  ( SELECT * FROM pragma_foreign_key_list('value')  ) "
+			"                  fk ON fk.[from] = ti.name "
+			"       ) c "
+			" WHERE t.type = 'table' " 
+			;		
+		
+		db.rlogon(dbConnectionString.c_str());
+		otl_stream inputStream(50, dbQuery.c_str(), db);
+		table_info::input_iterator begin(inputStream), end;
+		table_info_vector tableInfos;
+		std::copy(begin, end, std::inserter(tableInfos, tableInfos.end()));
 	}
 
 }

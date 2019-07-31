@@ -29,6 +29,28 @@ namespace srdev
 	using Path = std::string;
 }
 
+#include <boost/uuid/uuid.hpp>
+#include <boost/uuid/uuid_io.hpp>
+#include <boost/uuid/uuid_serialize.hpp>
+#ifdef __MINGW32__
+#pragma GCC diagnostic ignored "-Wconversion-null"
+#endif
+#include <boost/uuid/uuid_generators.hpp>
+#ifdef __MINGW32__
+#pragma GCC diagnostic pop
+#endif
+#include <boost/lexical_cast.hpp>
+
+namespace srdev
+{
+	using UuId = boost::uuids::uuid;
+	extern boost::uuids::random_generator generateId;
+	extern boost::uuids::nil_generator generateNullId;
+	extern boost::uuids::string_generator generateIdFromString;
+
+	using boost::lexical_cast;
+}
+
 namespace srdev
 {
 	extern const StringMultiMap& AppArguments;

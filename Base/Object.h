@@ -1,4 +1,4 @@
-//---------------------------------------------------------------------------
+	//---------------------------------------------------------------------------
 #ifndef ObjectH
 #define ObjectH
 //---------------------------------------------------------------------------
@@ -29,7 +29,7 @@ namespace srdev
 		Object(const Object& other);
 		Object& operator=(const Object& other);
 
-		static ObjectPtr make();
+		static ObjectPtr make(UuId typeId = generateNullId(), UuId objectId = generateNullId());
 		template<typename T>
 		static ObjectPtr make(std::initializer_list<T> properties);
 		template<typename It>
@@ -37,10 +37,17 @@ namespace srdev
 	
 		//static ObjectPtr make(std::initializer_list<std::pair<String, ValuePtr>> properties);
 
-		PropertyPtr findProperty(const String &name);
+		UuId getId() const { return objectId_; }
+		UuId  getTypeId()  const { return typeId_; }
+		uint32_t getStatus() const { return status_; }
+		PropertyPtr getProperty(size_t index);
+		PropertyPtr findProperty(const String& name);
 	protected:
 
 	private:
+		UuId objectId_;
+		UuId typeId_;
+		uint32_t status_;
 		PropertyPtrVector properties_;
 		ValuePtr& findOrCreateValue(const String &name, ValuePtr value = ValuePtr());
 
@@ -70,6 +77,7 @@ namespace srdev
 		REDIRECT_STL_CONTAINER(PropertyPtrVector, (*this)->properties_)
 	};
 	using ObjectValue = ValueImpl<ObjectPtr>;
+	using ObjectPtrVector = vector<ObjectPtr>;
 
 	struct Result
 	{

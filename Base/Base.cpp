@@ -8,7 +8,12 @@
 using namespace srdev;
 namespace srdev
 {
-namespace impl { StringMultiMap appArguments; }
+
+	namespace impl { StringMultiMap appArguments; }
+	boost::uuids::random_generator generateId;
+	boost::uuids::nil_generator generateNullId;
+	boost::uuids::string_generator generateIdFromString;
+
 }
 const StringMultiMap& srdev::AppArguments = srdev::impl::appArguments;
 

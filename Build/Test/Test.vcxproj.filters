@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="..\..\Test\BaseTests.cpp" />
+    <ClCompile Include="..\..\Test\DatabaseTests.cpp" />
+    <ClCompile Include="..\..\Test\ObjectTests.cpp" />
+    <ClCompile Include="..\..\Test\SerializationTests.cpp" />
+    <ClCompile Include="..\..\Test\ValueTests.cpp" />
+    <ClCompile Include="..\..\Test\WebTests.cpp" />
+    <ClCompile Include="..\..\Test\Test.cpp">
+      <Filter>TestApp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Test\TestApp.cpp">
+      <Filter>TestApp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Test\TraitsTests.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Test\BaseTests.h" />
+    <ClInclude Include="..\..\Test\DatabaseTests.h" />
+    <ClInclude Include="..\..\Test\ObjectTests.h" />
+    <ClInclude Include="..\..\Test\SerializationTests.h" />
+    <ClInclude Include="..\..\Test\ValueTests.h" />
+    <ClInclude Include="..\..\Test\WebTests.h" />
+    <ClInclude Include="..\..\Test\Test.h">
+      <Filter>TestApp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Test\TraitsTests.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\Test\testSQLite.db3" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="TestApp">
+      <UniqueIdentifier>{9f5b1436-7e89-450e-befa-436670632cac}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

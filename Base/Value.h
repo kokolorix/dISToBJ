@@ -21,7 +21,7 @@ namespace srdev
 		operator uint32_t() const;
 		operator double() const;
 		operator String() const;
-		//operator UuId() const;
+		operator UuId() const;
 	};
 	using ValuePtrVector = std::vector<ValuePtr>;
 	class Value : public Base
@@ -118,7 +118,7 @@ namespace srdev
 	using UInt64Value = ValueImpl<uint64_t>;
 	using DoubleValue = ValueImpl<double>;
 	using StringValue = ValueImpl<String>;
-	//using UuIdValue = ValueImpl<UuId>;
+	using UuIdValue = ValueImpl<UuId>;
 	using VectorValue = ValueImpl<ValuePtrVector>;
 	template<typename T>
 	inline ValuePtr Value::make(T v)
