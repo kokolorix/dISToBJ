@@ -29,7 +29,7 @@ namespace srdev
 		Object(const Object& other);
 		Object& operator=(const Object& other);
 
-		static ObjectPtr make(UuId typeId = generateNullId(), UuId objectId = generateNullId());
+		static ObjectPtr make(UuId typeId = generateNullId(), UuId objectId = generateNullId(), size_t propertiesCount = 0);
 		template<typename T>
 		static ObjectPtr make(std::initializer_list<T> properties);
 		template<typename It>
@@ -40,8 +40,10 @@ namespace srdev
 		UuId getId() const { return objectId_; }
 		UuId  getTypeId()  const { return typeId_; }
 		uint32_t getStatus() const { return status_; }
-		PropertyPtr getProperty(size_t index);
-		PropertyPtr findProperty(const String& name);
+		void addProperty(PropertyPtr property, size_t index);
+		PropertyPtr getProperty(size_t index) const;
+		PropertyPtr findProperty(const String& name) const;
+		PropertyPtr findOrCreateProperty(const String& name, ValuePtr defaultValue = ValuePtr());
 	protected:
 
 	private:

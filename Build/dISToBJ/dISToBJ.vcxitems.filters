@@ -131,21 +131,15 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Traits\Traits.h">
       <Filter>Traits</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Traits\BaseTraits.h">
-      <Filter>Traits</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <Xsd Include="$(MSBuildThisFileDirectory)..\..\Traits\Object.xsd">
-      <Filter>Traits</Filter>
-    </Xsd>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="$(MSBuildThisFileDirectory)..\..\Traits\ObjectTraits.xslt">
       <Filter>Traits</Filter>
     </Xml>
-    <Xml Include="$(MSBuildThisFileDirectory)..\..\Traits\BaseClass.xml">
+  </ItemGroup>
+  <ItemGroup>
+    <Xsd Include="$(MSBuildThisFileDirectory)..\..\Traits\ObjectTypes.xsd">
       <Filter>Traits</Filter>
-    </Xml>
+    </Xsd>
   </ItemGroup>
 </Project>

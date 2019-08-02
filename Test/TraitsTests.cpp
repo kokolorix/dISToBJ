@@ -32,15 +32,17 @@ namespace test
 	template<class PropertyT, typename TypeT, size_t IdT>
 	struct PropertyTraits
 	{
-		static String getName() { return PropertyT::name(); }
-		static uint32_t getId() { return PropertyT::id(); }
+		static uint32_t getId() { return PropertyT::getId(); }
+		static const String& getName() { static const String s = PropertyT::getName(); return s; }
+		static ValuePtr getDefaultValue() { static ValuePtr p = PropertyT::getDefaultValue(); return p; }
 		enum { Id = IdT };
-		typedef TypeT Type;
+		using Type = TypeT;
 
-		static PropertyPtr create(const String& name, size_t id, Type value)
+		static PropertyPtr make(ObjectPtr object)
 		{
-			PropertyPtr p = Property::make(name, value);
-			return p;
+			PropertyPtr property = Property::make(getName(), getDefaultValue());
+			object->addProperty(property, Id);
+			return property;
 		}
 	};
 
@@ -54,7 +56,11 @@ namespace test
 	struct Wrapper
 	{
 		Wrapper(ObjectPtr object) : object_(object) {}
-		ObjectImpl<Traits>* operator -> () const { return (ObjectImpl<Traits>*)object_.get(); }
+		ObjectImpl<Traits>* operator -> () const 
+		{
+			ObjectImpl<Traits>* impl = static_cast<ObjectImpl<Traits>*>(object_.get());
+			return impl; 
+		}
 	private:
 		ObjectPtr object_;
 	};
@@ -62,80 +68,133 @@ namespace test
 	template<class ObjectT, class BaseT, class PropertiesT>
 	struct ObjectTraits
 	{
-		typedef BaseT BaseTraits;
-		typedef PropertiesT Properties;
+		using BaseTraits = BaseT;
+		using Properties = PropertiesT;
 
-		static String getCategory() { return ObjectT::category(); }
-		static String getName() { return ObjectT::name(); }
-		static UuId getId() { return ObjectT::id(); }
+		static const String& getCategory() { static const String s = ObjectT::getCategory();  return s; }
+		static const String& getName() { static const String s = ObjectT::getName(); return s; }
+		static const UuId& getTypeId() { static const UuId  id = ObjectT::getTypeId(); return id; }
+
+
+		template < size_t > struct SizeT { };
+
+		template < typename TupleType >
+		static void InitializeProperties(ObjectPtr object)
+		{
+			InitializeProperties<TupleType>(SizeT<std::tuple_size<TupleType>::value>(), object);
+		}
+
+		template < typename TupleType >
+		static void InitializeProperties (SizeT<0>, ObjectPtr object) { }
+
+		template < typename TupleType, size_t N >
+		static void InitializeProperties(SizeT<N>, ObjectPtr object)
+		{
+			InitializeProperties<TupleType>(SizeT<N - 1>(), object);
+			using Traits = typename  std::tuple_element<N - 1, TupleType>::type;
+			Traits::make(object);
+		}
+		
 		static Wrapper<ObjectTraits<ObjectT, BaseT, PropertiesT>> make(UuId objectId = generateNullId())
 		{
-			ObjectPtr obj = Object::make(getId(), objectId);
-			return obj;
+			ObjectPtr object = Object::make(getTypeId(), objectId);
+
+			InitializeProperties<PropertiesT::List>(object);
+
+
+			return object;
 		}
 
 	};
 
-	template<typename ValueT>
-	struct ValueAccess
-	{
-		ValueAccess(PropertyPtr property) :property_(property) {}
-		operator const ValueT& () const { return  dynamic_pointer_cast<const ValueImpl<ValueT>>(property_->getValue())->getValue(); }
-		//ValueAccess& operator = (const ValueT& value) { property_->setValue(ValueImpl<ValueT>::make(value)); return *this; }
-		operator const ValuePtr () const { return  property_->getValue(); }
-		ValueAccess& operator = (ValuePtr value) { property_->setValue(value); return *this; }
-	private:
-		PropertyPtr property_;
-	};
+	//template<typename ValueT>
+	//struct ValueAccess
+	//{
+	//	ValueAccess() : property_(nullptr) {}
+	//	ValueAccess& operator = (PropertyPtr property) { property_ = property.get(); return *this; }
+	//	ValueAccess(PropertyPtr property) : property_(property.get()) {}
+	//	operator const ValueT& () const { return  dynamic_pointer_cast<const ValueImpl<ValueT>>(property_->getValue())->getValue(); }
+	//	operator const ValuePtr () const { return  property_->getValue(); }
+	//	ValueAccess& operator = (ValuePtr value) { property_->setValue(value); return *this; }
+	//private:
+	//	Property* property_;
+	//};
 }
 
 namespace test
 {
-	namespace Null
+	namespace System
 	{
-		struct Properties { enum { LastId = 0 }; };
-		struct Object
+		namespace ObjectBaseT
 		{
-			static String name() { return ""; }
-			static UuId id() { return generateNullId(); }
-		};
-		using Traits = ObjectTraits<Object, Object, Properties>;
-
-
+			struct ObjectT
+			{
+				static String getName() { return String(); }
+				static UuId getId() { return generateNullId(); }
+			};
+			struct PropertiesT 
+			{ 
+				using List = std::tuple<>;
+				enum { LastId = std::tuple_size<List>::value };
+			};
+		}
+		using ObjectBase = ObjectTraits<ObjectBaseT::ObjectT, ObjectBaseT::ObjectT, ObjectBaseT::PropertiesT>;
 	}
 	template<>
-	struct ObjectAccess<Null::Traits> : public Object
-	{
-	};
+	struct ObjectAccess<System::ObjectBase> : public Object {};
 
 	namespace System
 	{
-		namespace Type_Impl
+		namespace ObjectTypeT
 		{
-			using BaseTraits = Null::Traits;
-			namespace Name { struct Property { static String name() { return "Name"; } }; using Traits = PropertyTraits<Property, String, BaseTraits::Properties::LastId + 1>; }
+			using BaseTraits  = System::ObjectBase;
+			namespace SymbolName 
+			{ 
+				struct PropertyT 
+				{ 
+					static String getName() { return "SymbolName"; } 
+					static ValuePtr getDefaultValue() { return StringValue::make(""); }
+				};
+				using Traits = PropertyTraits<PropertyT, String, BaseTraits::Properties::LastId + 1>; 
+			}
+			namespace DisplayName 
+			{ 
+				struct PropertyT 
+				{ 
+					static String getName() { return "DisplayName"; } 
+					static ValuePtr getDefaultValue() { return StringValue::make(""); }
+				};
+				using Traits = PropertyTraits<PropertyT, String, BaseTraits::Properties::LastId + 2>; 
+			}
 			struct ObjectT
 			{
-				static String category() { return "System"; }
-				static String name() { return "Type"; }
-				static UuId id() { static const UuId id = generateIdFromString("{28BAB130-9B65-4C9D-92A2-A30AA581C4BA}"); return id; }
+				static String getCategory() { return "System"; }
+				static String getName() { return "Type"; }
+				static UuId getTypeId() { static const UuId id = generateIdFromString("{28BAB130-9B65-4C9D-92A2-A30AA581C4BA}"); return id; }
 			};
 			struct PropertiesT
 			{
-				using Name = Name::Traits;
-				enum { LastId = Name::Id };
+				using SymbolName = SymbolName::Traits;
+				using DisplayName = DisplayName::Traits;
+				using List = std::tuple<SymbolName,DisplayName>;
+				enum { LastId = std::tuple_size<List>::value };
 			};
+			using Traits = ObjectTraits<ObjectT, BaseTraits, PropertiesT>;
 		}
-		using Type = ObjectTraits<Type_Impl::ObjectT, Type_Impl::BaseTraits, Type_Impl::PropertiesT>;
+		using ObjectType = ObjectTypeT::Traits;
 	}
+
 	template<>
-	struct ObjectAccess<System::Type> : public ObjectImpl<System::Type::BaseTraits>
+	struct ObjectAccess<System::ObjectType> : public ObjectImpl<System::ObjectType::BaseTraits>
 	{
-		ValueAccess<String> Name =  ValueAccess<String>(getProperty(System::Type::Properties::Name::Id));
+		String getSymbolName() const { return dynamic_pointer_cast<const StringValue>(getProperty(System::ObjectType::Properties::SymbolName::Id)->getValue())->getValue(); }
+		void setSymbolName(const String& name) { getProperty(System::ObjectType::Properties::SymbolName::Id)->setValue(StringValue::make(name)); }
+		String getDisplayName() const { return dynamic_pointer_cast<const StringValue>(getProperty(System::ObjectType::Properties::DisplayName::Id)->getValue())->getValue(); }
+		void setDisplayName(const String& name) { getProperty(System::ObjectType::Properties::DisplayName::Id)->setValue(StringValue::make(name)); }
 	};
 
 	template<>
-	struct ObjectImpl<System::Type> : public ObjectAccess<System::Type>
+	struct ObjectImpl<System::ObjectType> : public ObjectAccess<System::ObjectType>
 	{
 		void doSomething() {}
 	};
@@ -145,9 +204,10 @@ namespace
 	void typeTest()
 	{
 		using namespace test;
-		auto type = System::Type::make();
-		String name = type->Name;
-		type->Name = "Holdrio";
+		auto type = System::ObjectType::make();
+		String name = type->getSymbolName();
+		type->setSymbolName("nonsense");
+		name = type->getSymbolName();
 	}
 
 }

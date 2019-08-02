@@ -51,19 +51,21 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Serialization\Xml.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\System\ObjectPersistence.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\System\ObjectRepository.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Traits\BaseTraits.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Traits\Traits.h" />
   </ItemGroup>
   <ItemGroup>
-    <Xsd Include="$(MSBuildThisFileDirectory)..\..\Traits\Object.xsd">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-    </Xsd>
+    <Xml Include="$(MSBuildThisFileDirectory)..\..\Traits\ObjectTraits.xslt" />
   </ItemGroup>
   <ItemGroup>
-    <Xml Include="$(MSBuildThisFileDirectory)..\..\Traits\BaseClass.xml" />
-    <Xml Include="$(MSBuildThisFileDirectory)..\..\Traits\ObjectTraits.xslt" />
+    <None Include="$(MSBuildThisFileDirectory)..\..\Traits\ObjectTypes.xsd">
+      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </DeploymentContent>
+      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </DeploymentContent>
+      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+      </DeploymentContent>
+      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+      </DeploymentContent>
+    </None>
   </ItemGroup>
 </Project>

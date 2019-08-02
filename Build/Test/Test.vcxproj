@@ -31,6 +31,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Test\BaseTests.h" />
+    <ClInclude Include="..\..\Test\BaseTraits.h" />
     <ClInclude Include="..\..\Test\DatabaseTests.h" />
     <ClInclude Include="..\..\Test\ObjectTests.h" />
     <ClInclude Include="..\..\Test\SerializationTests.h" />
@@ -41,6 +42,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\Test\testSQLite.db3" />
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="..\..\Test\BaseTypes.xml" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

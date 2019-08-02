@@ -80,23 +80,7 @@ namespace srdev
 
 using namespace srdev;
 
-ValuePtr& Object::findOrCreateValue(const String &name, ValuePtr value /*= ValuePtr()*/)
-{
-	PropertyPtr p = findProperty(name);
-	if (!p)
-	{
-		p = Property::make(name, value ? value : Value::make());
-		properties_.push_back(p);
-	}
-	else
-	{
-		if (value)
-			p->setValue(value);
-	}
-	return p->value_;
-}
-
-srdev::ObjectPtr srdev::Object::make(UuId typeId /*= generateNullId()*/, UuId objectId /*= generateNullId()*/)
+srdev::ObjectPtr srdev::Object::make(UuId typeId /*= generateNullId()*/, UuId objectId /*= generateNullId()*/, size_t propertiesCount /*= 0*/)
 {
 	auto obj = make_shared<Object>();
 	obj->typeId_ = typeId;
@@ -106,10 +90,20 @@ srdev::ObjectPtr srdev::Object::make(UuId typeId /*= generateNullId()*/, UuId ob
 	else
 		obj->objectId_ = objectId;
 
+	if (propertiesCount)
+		obj->properties_.resize(propertiesCount);
+
 	return obj;
 }
 
-srdev::PropertyPtr srdev::Object::getProperty(size_t index)
+void srdev::Object::addProperty(PropertyPtr property, size_t index)
+{
+	if (properties_.capacity() < index + 1)
+		properties_.resize(index + 1);
+	properties_.at(index) = property;
+}
+
+srdev::PropertyPtr srdev::Object::getProperty(size_t index) const
 {
 	return properties_.at(index);
 }
@@ -129,7 +123,7 @@ srdev::PropertyPtr srdev::Object::getProperty(size_t index)
 //    return obj;
 //}
 //
-PropertyPtr Object::findProperty(const String &name)
+PropertyPtr Object::findProperty(const String &name) const
 {
 	auto it = std::find_if(properties_.begin(), properties_.end(), [name](PropertyPtr p) { return p->getName() == name; });
 	if (it == properties_.end())
@@ -140,4 +134,33 @@ PropertyPtr Object::findProperty(const String &name)
       ValuePtr v = p->getValue();
 		return *it;
 	}
+}
+
+srdev::PropertyPtr srdev::Object::findOrCreateProperty(const String& name, ValuePtr defaultValue /*= ValuePtr()*/)
+{
+	PropertyPtr p = findProperty(name);
+	if (!p)
+	{
+		p = Property::make(name, ValuePtr());
+		properties_.push_back(p);
+	}
+	if (!p->getValue())
+		p->setValue(defaultValue ? defaultValue : Value::make());
+	return p;
+}
+
+ValuePtr& Object::findOrCreateValue(const String &name, ValuePtr value /*= ValuePtr()*/)
+{
+	PropertyPtr p = findProperty(name);
+	if (!p)
+	{
+		p = Property::make(name, value ? value : Value::make());
+		properties_.push_back(p);
+	}
+	else
+	{
+		if (value)
+			p->setValue(value);
+	}
+	return p->value_;
 }

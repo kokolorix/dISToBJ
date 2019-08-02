@@ -26,6 +26,7 @@
       <Filter>TestApp</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Test\TraitsTests.h" />
+    <ClInclude Include="..\..\Test\BaseTraits.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\Test\testSQLite.db3" />
@@ -34,5 +35,8 @@
     <Filter Include="TestApp">
       <UniqueIdentifier>{9f5b1436-7e89-450e-befa-436670632cac}</UniqueIdentifier>
     </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="..\..\Test\BaseTypes.xml" />
   </ItemGroup>
 </Project>

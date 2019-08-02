@@ -50,6 +50,7 @@
 	</xs:complexType>
 	<xs:complexType name="PropertyT">
 		<xs:attribute name="name" type="xs:string" use="required"/>
-		<xs:attribute name="type" type="ValueT"/>
+		<xs:attribute name="type" type="ValueT" use="required"/>
+		<xs:attribute name="default" type="xs:string" use="required"/>
 	</xs:complexType>
 </xs:schema>
