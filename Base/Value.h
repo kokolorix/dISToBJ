@@ -24,6 +24,7 @@ namespace srdev
 		operator UuId() const;
 	};
 	using ValuePtrVector = std::vector<ValuePtr>;
+	using Vector = ValuePtrVector;
 	class Value : public Base
 	{
 	public:
