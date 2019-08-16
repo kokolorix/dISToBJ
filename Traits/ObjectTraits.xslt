@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?altova_samplexml file:///D:/Projects/dISToBJ/Traits/BaseTypes.xml?>
+<?altova_samplexml file:///D:/Projects/dISToBJ/Test/BaseTypes.xml?>
 <xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:fn="http://www.w3.org/2005/02/xpath-functions" xmlns:xdt="http://www.w3.org/2005/02/xpath-datatypes">
 	<xsl:output method="text"/>
 	<xsl:variable name="tab1" select="'&#x9;'"/>
@@ -38,6 +38,12 @@
 		<xsl:value-of select="concat($tab2, '{', $newLine1)"/>
 		<xsl:apply-templates select="Base" mode="Traits"/>
 		<xsl:apply-templates select="Property" mode="PropertyT"/>
+		<xsl:value-of select="concat($tab3, 'struct ObjectT', $newLine1)"/>
+		<xsl:value-of select="concat($tab3, '{', $newLine1)"/>
+		<xsl:value-of select="concat($tab4, 'static String getCategory() { return &quot;', $category, '&quot;; }', $newLine1)"/>
+		<xsl:value-of select="concat($tab4, 'static String getName() { return &quot;', $name, '&quot;; }', $newLine1)"/>
+		<xsl:value-of select="concat($tab4, 'static UuId getTypeId() { static const UuId id = generateIdFromString(&quot;', $id, '&quot;); return id; }', $newLine1)"/>
+		<xsl:value-of select="concat($tab3, '};', $newLine1)"/>
 		<xsl:value-of select="concat($tab3, 'struct PropertiesT', $newLine1)"/>
 		<xsl:value-of select="concat($tab3, '{', $newLine1)"/>
 		<xsl:apply-templates select="Property" mode="using"/>
@@ -45,11 +51,19 @@
 		<xsl:apply-templates select="Property" mode="tuple"/>
 		<xsl:value-of select="concat('&gt;;', $newLine1)"/>
 		<xsl:value-of select="concat($tab4, 'enum { LastId = std::tuple_size&lt;List&gt;::value };', $newLine1)"/>
-		<xsl:value-of select="concat($tab3, '}', $newLine1)"/>
-		<xsl:value-of select="concat($tab3, 'using ObjectTraits&lt;ObjectT, BaseTraits, PropertiesT&gt;;', $newLine1)"/>
+		<xsl:value-of select="concat($tab3, '};', $newLine1)"/>
+		<xsl:value-of select="concat($tab3, 'using Traits = ObjectTraits&lt;ObjectT, BaseTraits, PropertiesT&gt;;', $newLine1)"/>
 		<xsl:value-of select="concat($tab2, '}', $newLine1)"/>
-		<xsl:value-of select="concat($tab2, 'using ', $name, ' = ', $name, 'T::Traits', $newLine1)"/>
+		<xsl:value-of select="concat($tab2, 'using ', $name, ' = ', $name, 'T::Traits;', $newLine1)"/>
 		<xsl:value-of select="concat($tab1, '}', $newLine1)"/>
+		<xsl:value-of select="concat($tab1, 'template&lt;&gt;', $newLine1)"/>
+		<xsl:variable name="object" select="concat($category, '::', $name)"/>
+		<xsl:value-of select="concat($tab1, 'struct ObjectAccess&lt;', $object, '&gt; : public ObjectImpl&lt;', $object, '::BaseTraits&gt;', $newLine1)"/>
+		<xsl:value-of select="concat($tab1, '{', $newLine1)"/>
+		<xsl:apply-templates select="Property" mode="access">
+			<xsl:with-param name="object" select="$object"/>
+		</xsl:apply-templates>
+		<xsl:value-of select="concat($tab1, '};', $newLine1)"/>
 	</xsl:template>
 	<!--=======================================================================-->
 	<!--process the Base node -->
@@ -66,22 +80,28 @@
 	<xsl:template match="Property" mode="PropertyT">
 		<xsl:variable name="type" select="@type"/>
 		<xsl:variable name="name" select="@name"/>
-		<xsl:variable name="default" select="@default"/>
+		<xsl:variable name="default">
+			<xsl:choose>
+				<xsl:when test="@default = ''">
+					<xsl:value-of select="concat(@type, '()')"/>
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:value-of select="@default"/>
+				</xsl:otherwise>
+			</xsl:choose>
+		</xsl:variable>
+		<!--		<xsl:variable name="default" select="@default"/>
+		<xsl:variable name="default" select="concat(@type, '()')"/>
+-->
 		<xsl:value-of select="concat($tab3, 'namespace ', $name, $newLine1)"/>
 		<xsl:value-of select="concat($tab3, '{', $newLine1)"/>
 		<xsl:value-of select="concat($tab4, 'struct PropertyT', $newLine1)"/>
 		<xsl:value-of select="concat($tab4, '{', $newLine1)"/>
-		<xsl:value-of select="concat($tab5, 'static ', $type, ' getName() { return &quot;', $name, '&quot;; }', $newLine1)"/>
+		<xsl:value-of select="concat($tab5, 'static String getName() { return &quot;', $name, '&quot;; }', $newLine1)"/>
 		<xsl:value-of select="concat($tab5, 'static ValuePtr getDefaultValue() { return ', $type, 'Value::make(', $default, '); }', $newLine1)"/>
-		<xsl:value-of select="concat($tab4, '}', $newLine1)"/>
+		<xsl:value-of select="concat($tab4, '};', $newLine1)"/>
+		<xsl:value-of select="concat($tab4, 'using Traits = PropertyTraits&lt;PropertyT,', $type,', BaseTraits::Properties::LastId + 1&gt;;', $newLine1)"/>
 		<xsl:value-of select="concat($tab3, '}', $newLine1)"/>
-	</xsl:template>
-	<!--=======================================================================-->
-	<!--process an Property node for using -->
-	<!--=======================================================================-->
-	<xsl:template match="Property" mode="using">
-		<xsl:variable name="name" select="@name"/>
-		<xsl:value-of select="concat($tab4, 'using ', $name, ' = ', $name, '::Traits;', $newLine1)"/>
 	</xsl:template>
 	<!--=======================================================================-->
 	<!--process an Property node for tuple -->
@@ -91,6 +111,28 @@
 		<xsl:value-of select="$name"/>
 		<xsl:if test="position() != last()">
 			<xsl:text>,</xsl:text>
+		</xsl:if>
+	</xsl:template>
+	<!--=======================================================================-->
+	<!--process an Property node for using -->
+	<!--=======================================================================-->
+	<xsl:template match="Property" mode="using">
+		<xsl:variable name="name" select="@name"/>
+		<xsl:value-of select="concat($tab4, 'using ', $name, ' = ', $name, '::Traits;', $newLine1)"/>
+	</xsl:template>
+	<!--=======================================================================-->
+	<!--process an Property node for getter and setter -->
+	<!--=======================================================================-->
+	<xsl:template match="Property" mode="access">
+		<xsl:param name="object"/>
+		<xsl:variable name="type" select="@type"/>
+		<xsl:variable name="name" select="@name"/>
+		<xsl:value-of select="concat($tab2, 'ValuePtr get', $name, 'Value() const { return dynamic_pointer_cast&lt;const ', $type, 'Value>(getProperty(', $object, '::Properties::', $name, '::Id)-&gt;getValue()); }', $newLine1)"/>
+		<xsl:value-of select="concat($tab2, 'void set', $name, 'Value(ValuePtr value) { getProperty(', $object, '::Properties::', $name, '::Id)-&gt;setValue(value	); }', $newLine1)"/>
+		<xsl:value-of select="concat($tab2, $type, ' get', $name, '() const { return dynamic_pointer_cast&lt;const ', $type, 'Value>(getProperty(', $object, '::Properties::', $name, '::Id)-&gt;getValue())-&gt;getValue(); }', $newLine1)"/>
+		<xsl:value-of select="concat($tab2, 'void set', $name, '(const ', $type, '&amp; value) { getProperty(', $object, '::Properties::', $name, '::Id)-&gt;setValue(', $type, 'Value::make(value)); }', $newLine1)"/>
+		<xsl:if test="position() != last()">
+			<xsl:value-of select="$newLine1"/>
 		</xsl:if>
 	</xsl:template>
 </xsl:stylesheet>

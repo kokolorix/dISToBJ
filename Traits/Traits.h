@@ -8,33 +8,18 @@ namespace srdev
 	template<class PropertyT, typename TypeT, size_t IdT>
 	struct PropertyTraits
 	{
-		static string getName() { return PropertyT::name(); }
-		static uint32_t getId() { return PropertyT::id(); }
+		static uint32_t getId() { return PropertyT::getId(); }
+		static const String& getName() { static const String s = PropertyT::getName(); return s; }
+		static ValuePtr getDefaultValue() { static ValuePtr p = PropertyT::getDefaultValue(); return p; }
 		enum { Id = IdT };
-		typedef TypeT Type;
+		using Type = TypeT;
 
-		static PropertyPtr create(const String& name, size_t id, Type value)
+		static PropertyPtr make(ObjectPtr object)
 		{
-			PropertyPtr p = Property::make(name, value);
-			return p;
+			PropertyPtr property = Property::make(getName(), getDefaultValue());
+			object->addProperty(property, Id);
+			return property;
 		}
-	};
-
-	template<class ObjectT, class BaseT, class PropertiesT>
-	struct ObjectTraits
-	{
-		typedef BaseT BaseTraits;
-		typedef PropertiesT Properties;
-
-		static string getName() { return ObjectT::name(); }
-		static UuId getId() { return ObjectT::id(); }
-		static ObjectPtr create(const string& name)
-		{
-			ObjectPtr object = Object::make();
-			object["Name"] = name;
-			return object;
-		}
-
 	};
 
 	template<class Traits>
@@ -47,27 +32,75 @@ namespace srdev
 	struct Wrapper
 	{
 		Wrapper(ObjectPtr object) : object_(object) {}
-		ObjectImpl<Traits>* operator -> () const { return (ObjectImpl<Traits>*)object_.get(); }
+		ObjectImpl<Traits>* operator -> () const
+		{
+			ObjectImpl<Traits>* impl = static_cast<ObjectImpl<Traits>*>(object_.get());
+			return impl;
+		}
 	private:
 		ObjectPtr object_;
 	};
 
-	namespace Null
+	template<class ObjectT, class BaseT, class PropertiesT>
+	struct ObjectTraits
 	{
-		struct Properties { enum { LastId = 0 }; };
-		struct Object
+		using BaseTraits = BaseT;
+		using Properties = PropertiesT;
+
+		static const String& getCategory() { static const String s = ObjectT::getCategory();  return s; }
+		static const String& getName() { static const String s = ObjectT::getName(); return s; }
+		static const UuId& getTypeId() { static const UuId  id = ObjectT::getTypeId(); return id; }
+
+
+		template < size_t > struct SizeT { };
+
+		template < typename TupleType >
+		static void InitializeProperties(ObjectPtr object)
 		{
-			static String name() { return ""; }
-			static UuId id() { return generateNullId(); }
-		};
-		using Traits = ObjectTraits<Object, Object, Properties>;
+			InitializeProperties<TupleType>(SizeT<std::tuple_size<TupleType>::value>(), object);
+		}
 
+		template < typename TupleType >
+		static void InitializeProperties(SizeT<0>, ObjectPtr object) { }
 
+		template < typename TupleType, size_t N >
+		static void InitializeProperties(SizeT<N>, ObjectPtr object)
+		{
+			InitializeProperties<TupleType>(SizeT<N - 1>(), object);
+			using Traits = typename  std::tuple_element<N - 1, TupleType>::type;
+			Traits::make(object);
+		}
+
+		static Wrapper<ObjectTraits<ObjectT, BaseT, PropertiesT>> make(UuId objectId = generateNullId())
+		{
+			ObjectPtr object = Object::make(getTypeId(), objectId);
+
+			InitializeProperties<PropertiesT::List>(object);
+
+			return object;
+		}
+
+	};
+
+	namespace System
+	{
+		namespace ObjectBaseT
+		{
+			struct ObjectT
+			{
+				static String getName() { return String(); }
+				static UuId getId() { return generateNullId(); }
+			};
+			struct PropertiesT
+			{
+				using List = std::tuple<>;
+				enum { LastId = std::tuple_size<List>::value };
+			};
+		}
+		using ObjectBase = ObjectTraits<ObjectBaseT::ObjectT, ObjectBaseT::ObjectT, ObjectBaseT::PropertiesT>;
 	}
 	template<>
-	struct ObjectAccess<Null::Traits> : public Object
-	{
-	};
+	struct ObjectAccess<System::ObjectBase> : public Object {};
 }
 
 #endif
