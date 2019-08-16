@@ -138,8 +138,6 @@
     </Xml>
   </ItemGroup>
   <ItemGroup>
-    <Xsd Include="$(MSBuildThisFileDirectory)..\..\Traits\ObjectTypes.xsd">
-      <Filter>Traits</Filter>
-    </Xsd>
+    <None Include="$(MSBuildThisFileDirectory)..\..\Traits\ObjectTypes.xsd" />
   </ItemGroup>
 </Project>
