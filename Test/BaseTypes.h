@@ -54,6 +54,10 @@ namespace srdev
 			};
 			using Traits = ObjectTraits<ObjectT, BaseTraits, PropertiesT>;
 		}
+		/*!
+		\include ObjectType.xml
+		\include ObjectType.cpp
+		*/
 		using ObjectType = ObjectTypeT::Traits;
 	}
 	template<>
@@ -122,6 +126,10 @@ namespace srdev
 			};
 			using Traits = ObjectTraits<ObjectT, BaseTraits, PropertiesT>;
 		}
+		/*!
+		\include PropertyType.xml
+		\include PropertyType.cpp
+		*/
 		using PropertyType = PropertyTypeT::Traits;
 	}
 	template<>

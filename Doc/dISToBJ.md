@@ -22,19 +22,25 @@
 - srdev::Property modulates a the srdev::Property from an srdev::Object
 
 [Go to the graphical class hierarchy](inherits.html)
+\ref markdown
 
 \addtogroup Base
 
 This module contains basic constructs like srdev::Base or srdev::cast
 
-\ref markdown
+\addtogroup Traits
+
+This module contains traits and wrappers for object classes and instances.
+- System::ObjectType
+- ObjectAccess<System::ObjectType>
+
 
 \page markdown Markdown Syntax
 \htmlonly
- <iframe src="../markdown-guide.pdf" width="100%" scrolling="no" frameborder="0" id="lieferdatenbanken.iframe">markdown</iframe> 
+ <iframe src="../markdown-guide.pdf" width="100%" scrolling="no" frameborder="0" id="markdown-guide.iframe">markdown</iframe> 
 
 <script>
-var iframe = document.getElementById("lieferdatenbanken.iframe");    
+var iframe = document.getElementById("markdown-guide.iframe");    
 iframe.onload = function(){  iframe.style.height = (iframe.offsetParent.offsetHeight - iframe.offsetHeight - 30) + 'px'; }
 window.onresize = function(){   iframe.style.height = ( window.innerHeight - 200) + 'px'; }
 </script>

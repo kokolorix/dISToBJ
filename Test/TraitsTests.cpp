@@ -33,7 +33,7 @@ namespace
 	{
 		auto objectType = System::ObjectType::make();
 		String name = objectType->getName();
-		objectType->setName("nonsense");
+		objectType->setName(name);
 		name = objectType->getName();
 		//Vector propertyTypes = {System::PropertyType::make()};
 		//objectType->setPropertyTypes(propertyTypes);

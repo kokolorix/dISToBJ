@@ -6,7 +6,7 @@
 		<Property name="Name" type="String" default=""/>
 		<Property name="DisplayName" type="String" default=""/>
 		<Property name="PropertyTypes" type="Vector" default=""/>
-</Object>
+	</Object>
 	<Object name="PropertyType" category="System" id="{5BD0E6BB-B3A8-4CD5-A764-F5B0826ED79A}">
 		<Base name="ObjectBase" category="System" id="{00000000-0000-0000-0000-000000000000}"/>
 		<Property name="Name" type="String" default=""/>
