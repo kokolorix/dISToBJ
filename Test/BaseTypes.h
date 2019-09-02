@@ -18,7 +18,7 @@ namespace srdev
 					static String getName() { return "Name"; }
 					static ValuePtr getDefaultValue() { return StringValue::make(String()); }
 				};
-				using Traits = PropertyTraits<PropertyT,String, BaseTraits::Properties::LastId + 1>;
+				using Traits = PropertyTraits<PropertyT,String, BaseTraits::Properties::LastId + 0 >;
 			}
 			namespace DisplayName
 			{
@@ -27,7 +27,7 @@ namespace srdev
 					static String getName() { return "DisplayName"; }
 					static ValuePtr getDefaultValue() { return StringValue::make(String()); }
 				};
-				using Traits = PropertyTraits<PropertyT,String, BaseTraits::Properties::LastId + 1>;
+				using Traits = PropertyTraits<PropertyT,String, BaseTraits::Properties::LastId + 1 >;
 			}
 			namespace PropertyTypes
 			{
@@ -36,7 +36,7 @@ namespace srdev
 					static String getName() { return "PropertyTypes"; }
 					static ValuePtr getDefaultValue() { return VectorValue::make(Vector()); }
 				};
-				using Traits = PropertyTraits<PropertyT,Vector, BaseTraits::Properties::LastId + 1>;
+				using Traits = PropertyTraits<PropertyT,Vector, BaseTraits::Properties::LastId + 2 >;
 			}
 			struct ObjectT
 			{
@@ -60,23 +60,42 @@ namespace srdev
 		*/
 		using ObjectType = ObjectTypeT::Traits;
 	}
+	/// \copydoc System::ObjectType
 	template<>
 	struct ObjectAccess<System::ObjectType> : public ObjectImpl<System::ObjectType::BaseTraits>
 	{
-		ValuePtr getNameValue() const { return dynamic_pointer_cast<const StringValue>(getProperty(System::ObjectType::Properties::Name::Id)->getValue()); }
-		void setNameValue(ValuePtr value) { getProperty(System::ObjectType::Properties::Name::Id)->setValue(value ); }
-		String getName() const { return dynamic_pointer_cast<const StringValue>(getProperty(System::ObjectType::Properties::Name::Id)->getValue())->getValue(); }
-		void setName(const String& value) { getProperty(System::ObjectType::Properties::Name::Id)->setValue(StringValue::make(value)); }
+		StringValuePtr getName() const
+		{
+			auto property = getProperty(System::ObjectType::Properties::Name::Id);
+			return property->getValue();
+		}
+		void setName(StringValuePtr value)
+		{
+			auto property = getProperty(System::ObjectType::Properties::Name::Id);
+			property->setValue(value);
+		}
 
-		ValuePtr getDisplayNameValue() const { return dynamic_pointer_cast<const StringValue>(getProperty(System::ObjectType::Properties::DisplayName::Id)->getValue()); }
-		void setDisplayNameValue(ValuePtr value) { getProperty(System::ObjectType::Properties::DisplayName::Id)->setValue(value ); }
-		String getDisplayName() const { return dynamic_pointer_cast<const StringValue>(getProperty(System::ObjectType::Properties::DisplayName::Id)->getValue())->getValue(); }
-		void setDisplayName(const String& value) { getProperty(System::ObjectType::Properties::DisplayName::Id)->setValue(StringValue::make(value)); }
+		StringValuePtr getDisplayName() const
+		{
+			auto property = getProperty(System::ObjectType::Properties::DisplayName::Id);
+			return property->getValue();
+		}
+		void setDisplayName(StringValuePtr value)
+		{
+			auto property = getProperty(System::ObjectType::Properties::DisplayName::Id);
+			property->setValue(value);
+		}
 
-		ValuePtr getPropertyTypesValue() const { return dynamic_pointer_cast<const VectorValue>(getProperty(System::ObjectType::Properties::PropertyTypes::Id)->getValue()); }
-		void setPropertyTypesValue(ValuePtr value) { getProperty(System::ObjectType::Properties::PropertyTypes::Id)->setValue(value ); }
-		Vector getPropertyTypes() const { return dynamic_pointer_cast<const VectorValue>(getProperty(System::ObjectType::Properties::PropertyTypes::Id)->getValue())->getValue(); }
-		void setPropertyTypes(const Vector& value) { getProperty(System::ObjectType::Properties::PropertyTypes::Id)->setValue(VectorValue::make(value)); }
+		VectorValuePtr getPropertyTypes() const
+		{
+			auto property = getProperty(System::ObjectType::Properties::PropertyTypes::Id);
+			return property->getValue();
+		}
+		void setPropertyTypes(VectorValuePtr value)
+		{
+			auto property = getProperty(System::ObjectType::Properties::PropertyTypes::Id);
+			property->setValue(value);
+		}
 	};
 	namespace System
 	{
@@ -90,7 +109,7 @@ namespace srdev
 					static String getName() { return "Name"; }
 					static ValuePtr getDefaultValue() { return StringValue::make(String()); }
 				};
-				using Traits = PropertyTraits<PropertyT,String, BaseTraits::Properties::LastId + 1>;
+				using Traits = PropertyTraits<PropertyT,String, BaseTraits::Properties::LastId + 0 >;
 			}
 			namespace DisplayName
 			{
@@ -99,7 +118,7 @@ namespace srdev
 					static String getName() { return "DisplayName"; }
 					static ValuePtr getDefaultValue() { return StringValue::make(String()); }
 				};
-				using Traits = PropertyTraits<PropertyT,String, BaseTraits::Properties::LastId + 1>;
+				using Traits = PropertyTraits<PropertyT,String, BaseTraits::Properties::LastId + 1 >;
 			}
 			namespace Type
 			{
@@ -108,7 +127,7 @@ namespace srdev
 					static String getName() { return "Type"; }
 					static ValuePtr getDefaultValue() { return StringValue::make(String()); }
 				};
-				using Traits = PropertyTraits<PropertyT,String, BaseTraits::Properties::LastId + 1>;
+				using Traits = PropertyTraits<PropertyT,String, BaseTraits::Properties::LastId + 2 >;
 			}
 			struct ObjectT
 			{
@@ -132,23 +151,42 @@ namespace srdev
 		*/
 		using PropertyType = PropertyTypeT::Traits;
 	}
+	/// \copydoc System::PropertyType
 	template<>
 	struct ObjectAccess<System::PropertyType> : public ObjectImpl<System::PropertyType::BaseTraits>
 	{
-		ValuePtr getNameValue() const { return dynamic_pointer_cast<const StringValue>(getProperty(System::PropertyType::Properties::Name::Id)->getValue()); }
-		void setNameValue(ValuePtr value) { getProperty(System::PropertyType::Properties::Name::Id)->setValue(value ); }
-		String getName() const { return dynamic_pointer_cast<const StringValue>(getProperty(System::PropertyType::Properties::Name::Id)->getValue())->getValue(); }
-		void setName(const String& value) { getProperty(System::PropertyType::Properties::Name::Id)->setValue(StringValue::make(value)); }
+		StringValuePtr getName() const
+		{
+			auto property = getProperty(System::PropertyType::Properties::Name::Id);
+			return property->getValue();
+		}
+		void setName(StringValuePtr value)
+		{
+			auto property = getProperty(System::PropertyType::Properties::Name::Id);
+			property->setValue(value);
+		}
 
-		ValuePtr getDisplayNameValue() const { return dynamic_pointer_cast<const StringValue>(getProperty(System::PropertyType::Properties::DisplayName::Id)->getValue()); }
-		void setDisplayNameValue(ValuePtr value) { getProperty(System::PropertyType::Properties::DisplayName::Id)->setValue(value ); }
-		String getDisplayName() const { return dynamic_pointer_cast<const StringValue>(getProperty(System::PropertyType::Properties::DisplayName::Id)->getValue())->getValue(); }
-		void setDisplayName(const String& value) { getProperty(System::PropertyType::Properties::DisplayName::Id)->setValue(StringValue::make(value)); }
+		StringValuePtr getDisplayName() const
+		{
+			auto property = getProperty(System::PropertyType::Properties::DisplayName::Id);
+			return property->getValue();
+		}
+		void setDisplayName(StringValuePtr value)
+		{
+			auto property = getProperty(System::PropertyType::Properties::DisplayName::Id);
+			property->setValue(value);
+		}
 
-		ValuePtr getTypeValue() const { return dynamic_pointer_cast<const StringValue>(getProperty(System::PropertyType::Properties::Type::Id)->getValue()); }
-		void setTypeValue(ValuePtr value) { getProperty(System::PropertyType::Properties::Type::Id)->setValue(value ); }
-		String getType() const { return dynamic_pointer_cast<const StringValue>(getProperty(System::PropertyType::Properties::Type::Id)->getValue())->getValue(); }
-		void setType(const String& value) { getProperty(System::PropertyType::Properties::Type::Id)->setValue(StringValue::make(value)); }
+		StringValuePtr getType() const
+		{
+			auto property = getProperty(System::PropertyType::Properties::Type::Id);
+			return property->getValue();
+		}
+		void setType(StringValuePtr value)
+		{
+			auto property = getProperty(System::PropertyType::Properties::Type::Id);
+			property->setValue(value);
+		}
 	};
 }
 

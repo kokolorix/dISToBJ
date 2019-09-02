@@ -2,13 +2,13 @@
 <?xml-stylesheet type="text/xsl" href="../Traits/ObjectTraits.xslt"?>
 <ObjectTypes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\Traits\ObjectTypes.xsd">
 	<Object name="ObjectType" category="System" id="{C53E3E49-39B1-452E-9DEE-B20709A06F49}">
-		<Base name="ObjectBase" category="System" id="{00000000-0000-0000-0000-000000000000}"/>
+		<Base name="ObjectBase" category="System"/>
 		<Property name="Name" type="String" default=""/>
 		<Property name="DisplayName" type="String" default=""/>
 		<Property name="PropertyTypes" type="Vector" default=""/>
 	</Object>
 	<Object name="PropertyType" category="System" id="{5BD0E6BB-B3A8-4CD5-A764-F5B0826ED79A}">
-		<Base name="ObjectBase" category="System" id="{00000000-0000-0000-0000-000000000000}"/>
+		<Base name="ObjectBase" category="System"/>
 		<Property name="Name" type="String" default=""/>
 		<Property name="DisplayName" type="String" default=""/>
 		<Property name="Type" type="String" default=""/>

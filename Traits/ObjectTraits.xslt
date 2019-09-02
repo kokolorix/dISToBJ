@@ -80,6 +80,7 @@
 		<xsl:value-of select="concat($tab2, '*/', $newLine1)"/>
 		<xsl:value-of select="concat($tab2, 'using ', $name, ' = ', $name, 'T::Traits;', $newLine1)"/>
 		<xsl:value-of select="concat($tab1, '}', $newLine1)"/>
+		<xsl:value-of select="concat($tab1, '/// \copydoc ', $object, $newLine1)"/>
 		<xsl:value-of select="concat($tab1, 'template&lt;&gt;', $newLine1)"/>
 		<xsl:value-of select="concat($tab1, 'struct ObjectAccess&lt;', $object, '&gt; : public ObjectImpl&lt;', $object, '::BaseTraits&gt;', $newLine1)"/>
 		<xsl:value-of select="concat($tab1, '{', $newLine1)"/>
@@ -123,7 +124,7 @@
 		<xsl:value-of select="concat($tab5, 'static String getName() { return &quot;', $name, '&quot;; }', $newLine1)"/>
 		<xsl:value-of select="concat($tab5, 'static ValuePtr getDefaultValue() { return ', $type, 'Value::make(', $default, '); }', $newLine1)"/>
 		<xsl:value-of select="concat($tab4, '};', $newLine1)"/>
-		<xsl:value-of select="concat($tab4, 'using Traits = PropertyTraits&lt;PropertyT,', $type,', BaseTraits::Properties::LastId + 1&gt;;', $newLine1)"/>
+		<xsl:value-of select="concat($tab4, 'using Traits = PropertyTraits&lt;PropertyT,', $type,', BaseTraits::Properties::LastId + ', position() -1 , ' &gt;;', $newLine1)"/>
 		<xsl:value-of select="concat($tab3, '}', $newLine1)"/>
 	</xsl:template>
 	<!--=======================================================================-->
@@ -150,10 +151,18 @@
 		<xsl:param name="object"/>
 		<xsl:variable name="type" select="@type"/>
 		<xsl:variable name="name" select="@name"/>
-		<xsl:value-of select="concat($tab2, 'ValuePtr get', $name, 'Value() const { return dynamic_pointer_cast&lt;const ', $type, 'Value>(getProperty(', $object, '::Properties::', $name, '::Id)-&gt;getValue()); }', $newLine1)"/>
-		<xsl:value-of select="concat($tab2, 'void set', $name, 'Value(ValuePtr value) { getProperty(', $object, '::Properties::', $name, '::Id)-&gt;setValue(value	); }', $newLine1)"/>
-		<xsl:value-of select="concat($tab2, $type, ' get', $name, '() const { return dynamic_pointer_cast&lt;const ', $type, 'Value>(getProperty(', $object, '::Properties::', $name, '::Id)-&gt;getValue())-&gt;getValue(); }', $newLine1)"/>
-		<xsl:value-of select="concat($tab2, 'void set', $name, '(const ', $type, '&amp; value) { getProperty(', $object, '::Properties::', $name, '::Id)-&gt;setValue(', $type, 'Value::make(value)); }', $newLine1)"/>
+		<xsl:value-of select="concat($tab2, $type, 'ValuePtr get', $name, '() const', $newLine1, $tab2, '{', $newLine1)"/>
+		<xsl:value-of select="concat($tab3, 'auto property = getProperty(', $object, '::Properties::', $name, '::Id);', $newLine1)"/>
+		<xsl:value-of select="concat($tab3, 'return property-&gt;getValue();', $newLine1)"/>
+		<xsl:value-of select="concat($tab2, '}', $newLine1)"/>
+		<xsl:value-of select="concat($tab2, 'void set', $name, '(', $type, 'ValuePtr value)', $newLine1, $tab2, '{', $newLine1)"/>
+		<xsl:value-of select="concat($tab3, 'auto property = getProperty(', $object, '::Properties::', $name, '::Id);', $newLine1)"/>
+		<xsl:value-of select="concat($tab3, 'property-&gt;setValue(value);', $newLine1)"/>
+		<xsl:value-of select="concat($tab2, '}', $newLine1)"/>
+		<!-- <xsl:value-of select="concat($tab2, 'ValuePtr get', $name, '() const { return dynamic_pointer_cast&lt;const ', $type, 'Value>(getProperty(', $object, '::Properties::', $name, '::Id)-&gt;getValue()); }', $newLine1)"/> -->
+		<!--<xsl:value-of select="concat($tab2, 'void set', $name, '(ValuePtr value) { getProperty(', $object, '::Properties::', $name, '::Id)-&gt;setValue(value	); }', $newLine1)"/>-->
+		<!-- <xsl:value-of select="concat($tab2, $type, ' get', $name, '() const { return dynamic_pointer_cast&lt;const ', $type, 'Value>(getProperty(', $object, '::Properties::', $name, '::Id)-&gt;getValue())-&gt;getValue(); }', $newLine1)"/>
+		<xsl:value-of select="concat($tab2, 'void set', $name, '(const ', $type, '&amp; value) { getProperty(', $object, '::Properties::', $name, '::Id)-&gt;setValue(', $type, 'Value::make(value)); }', $newLine1)"/> -->
 		<xsl:if test="position() != last()">
 			<xsl:value-of select="$newLine1"/>
 		</xsl:if>

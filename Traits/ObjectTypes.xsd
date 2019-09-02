@@ -34,7 +34,6 @@
 	<xs:complexType name="BaseT">
 		<xs:attribute name="name" type="xs:string" use="required"/>
 		<xs:attribute name="category" type="xs:string" use="required"/>
-		<xs:attribute name="id" type="UuIdT" use="required"/>
 	</xs:complexType>
 	<xs:complexType name="ObjectT">
 		<xs:complexContent>
@@ -45,6 +44,7 @@
 						<xs:element name="Property" type="PropertyT"/>
 					</xs:sequence>
 				</xs:sequence>
+				<xs:attribute name="id" type="UuIdT" use="required"/>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
