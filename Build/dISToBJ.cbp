@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="dISToBJ" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/dISToBJ" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+					<Add directory="Test" />
+				</Compiler>
+				<Linker>
+					<Add library="ws2_32" />
+				</Linker>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/dISToBJ" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add library="ws2_32.lib" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-std=c++1z" />
+			<Add option="-fexceptions" />
+			<Add option="-Wno-unknown-pragmas" />
+			<Add directory="../Pch" />
+			<Add directory="../Base" />
+			<Add directory="../Test" />
+			<Add directory="../Serialization" />
+			<Add directory="../3rdParty" />
+			<Add directory="D:/Projects/boost_1_68_0" />
+		</Compiler>
+		<Unit filename="../3rdParty/civetweb/CivetServer.cpp" />
+		<Unit filename="../3rdParty/civetweb/CivetServer.h" />
+		<Unit filename="../3rdParty/civetweb/civetweb.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../3rdParty/civetweb/civetweb.h" />
+		<Unit filename="../3rdParty/civetweb/handle_form.inl" />
+		<Unit filename="../3rdParty/civetweb/md5.inl" />
+		<Unit filename="../3rdParty/nlohmann/json.hpp" />
+		<Unit filename="../3rdParty/rapidxml/rapidxml.hpp" />
+		<Unit filename="../3rdParty/rapidxml/rapidxml_iterators.hpp" />
+		<Unit filename="../3rdParty/rapidxml/rapidxml_print.hpp" />
+		<Unit filename="../3rdParty/rapidxml/rapidxml_utils.hpp" />
+		<Unit filename="../Base/Base.cpp" />
+		<Unit filename="../Base/Base.h" />
+		<Unit filename="../Base/Cast.h" />
+		<Unit filename="../Base/Compare.h" />
+		<Unit filename="../Base/Object.cpp" />
+		<Unit filename="../Base/Object.h" />
+		<Unit filename="../Base/Property.cpp" />
+		<Unit filename="../Base/Property.h" />
+		<Unit filename="../Base/Value.cpp" />
+		<Unit filename="../Base/Value.h" />
+		<Unit filename="../Serialization/Json.cpp" />
+		<Unit filename="../Serialization/Json.h" />
+		<Unit filename="../Serialization/Xml.cpp" />
+		<Unit filename="../Serialization/Xml.h" />
+		<Unit filename="../Test/BaseTests.cpp" />
+		<Unit filename="../Test/BaseTests.h" />
+		<Unit filename="../Test/ObjectTests.cpp" />
+		<Unit filename="../Test/ObjectTests.h" />
+		<Unit filename="../Test/SerializationTests.cpp" />
+		<Unit filename="../Test/SerializationTests.h" />
+		<Unit filename="../Test/TesApp.cpp" />
+		<Unit filename="../Test/Test.cpp" />
+		<Unit filename="../Test/Test.h" />
+		<Unit filename="../Test/ValueTests.cpp" />
+		<Unit filename="../Test/ValueTests.h" />
+		<Unit filename="../Test/WebTests.cpp" />
+		<Unit filename="../Test/WebTests.h" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+			<lib_finder disable_auto="1" />
+			<DoxyBlocks>
+				<comment_style block="0" line="0" />
+				<doxyfile_project />
+				<doxyfile_build />
+				<doxyfile_warnings />
+				<doxyfile_output />
+				<doxyfile_dot class_diagrams="1" have_dot="1" />
+				<general />
+			</DoxyBlocks>
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
