@@ -13,7 +13,9 @@
 
  \subsection Namespaces
 
+- srdev is the namespace where all is in
 - srdev::Test is the namespace where all test are in
+- srdev::System is the namespace where all system classes are in
 
  \subsection Classes
 
@@ -29,11 +31,9 @@
 This module contains basic constructs like srdev::Base or srdev::cast
 
 \addtogroup Traits
-
 This module contains traits and wrappers for object classes and instances.
-- System::ObjectType
-- ObjectAccess<System::ObjectType>
-
+- srdev::ObjectAccess< System::ObjectType >
+- srdev::ObjectAccess< System::PropertyType >
 
 \page markdown Markdown Syntax
 \htmlonly
