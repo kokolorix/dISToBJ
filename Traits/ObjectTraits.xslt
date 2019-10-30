@@ -9,8 +9,8 @@
 	<xsl:variable name="tab3" select="concat($tab2, '&#x9;')"/>
 	<xsl:variable name="tab4" select="concat($tab3, '&#x9;')"/>
 	<xsl:variable name="tab5" select="concat($tab4, '&#x9;')"/>
-	<xsl:variable name="newLine1" select="'&#xa;'"/>
-	<xsl:variable name="newLine2" select="concat($newLine1, '&#xa;')"/>
+	<xsl:variable name="newLine1" select="'&#xA;'"/>
+	<xsl:variable name="newLine2" select="concat($newLine1, '&#xA;')"/>
 	<!--=======================================================================-->
 	<!--header with guards ans includes -->
 	<!--=======================================================================-->
@@ -70,7 +70,7 @@
 		<xsl:variable name="object" select="concat($category, '::', $name)"/>
 		<xsl:result-document href="{$cpp}" format="text-def">
 			<xsl:variable name="varName" select="concat(translate(substring($name,1,1),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'), substring($name,2,string-length($name)-1))"/>
-			<xsl:value-of select="concat('srdev::Wrapper&lt;', $object, '> ', $varName,' = ', $object, '::make();', $newLine2)"/>
+			<xsl:value-of select="concat('srdev::Wrapper&lt;', $object, '&gt; ', $varName,' = ', $object, '::make();', $newLine2)"/>
 			<xsl:apply-templates select="Property" mode="example">
 				<xsl:with-param name="objVarName" select="$varName"/>
 			</xsl:apply-templates>
@@ -179,8 +179,8 @@
 		String name = objectType->getName();
 		objectType->setName(name);
 		-->
-		<xsl:value-of select="concat($type, ' ', $varName, ' = ', $objVarName, '->get', $name, '();', $newLine1)"/>
-		<xsl:value-of select="concat($objVarName, '->set', $name, '(', $varName, ');', $newLine1)"/>
+		<xsl:value-of select="concat($type, ' ', $varName, ' = ', $objVarName, '-&gt;get', $name, '();', $newLine1)"/>
+		<xsl:value-of select="concat($objVarName, '-&gt;set', $name, '(', $varName, ');', $newLine1)"/>
 		<xsl:if test="position() != last()">
 			<xsl:value-of select="$newLine1"/>
 		</xsl:if>

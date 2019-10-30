@@ -1,4 +1,4 @@
-#ifndef BaseTypesH
+﻿<?xml version="1.0" encoding="UTF-8"?>#ifndef BaseTypesH
 #define BaseTypesH
 
 #include "Object.h"
@@ -18,7 +18,7 @@ namespace srdev
 					static String getName() { return "Name"; }
 					static ValuePtr getDefaultValue() { return StringValue::make(String()); }
 				};
-				using Traits = PropertyTraits<PropertyT,String, BaseTraits::Properties::LastId + 0 >;
+				using Traits = PropertyTraits&lt;PropertyT,String, BaseTraits::Properties::LastId + 0 &gt;;
 			}
 			namespace DisplayName
 			{
@@ -27,7 +27,7 @@ namespace srdev
 					static String getName() { return "DisplayName"; }
 					static ValuePtr getDefaultValue() { return StringValue::make(String()); }
 				};
-				using Traits = PropertyTraits<PropertyT,String, BaseTraits::Properties::LastId + 1 >;
+				using Traits = PropertyTraits&lt;PropertyT,String, BaseTraits::Properties::LastId + 1 &gt;;
 			}
 			namespace PropertyTypes
 			{
@@ -36,7 +36,7 @@ namespace srdev
 					static String getName() { return "PropertyTypes"; }
 					static ValuePtr getDefaultValue() { return VectorValue::make(Vector()); }
 				};
-				using Traits = PropertyTraits<PropertyT,Vector, BaseTraits::Properties::LastId + 2 >;
+				using Traits = PropertyTraits&lt;PropertyT,Vector, BaseTraits::Properties::LastId + 2 &gt;;
 			}
 			struct ObjectT
 			{
@@ -49,10 +49,10 @@ namespace srdev
 				using Name = Name::Traits;
 				using DisplayName = DisplayName::Traits;
 				using PropertyTypes = PropertyTypes::Traits;
-				using List = std::tuple<Name,DisplayName,PropertyTypes>;
-				enum { LastId = std::tuple_size<List>::value };
+				using List = std::tuple&lt;Name,DisplayName,PropertyTypes&gt;;
+				enum { LastId = std::tuple_size&lt;List&gt;::value };
 			};
-			using Traits = ObjectTraits<ObjectT, BaseTraits, PropertiesT>;
+			using Traits = ObjectTraits&lt;ObjectT, BaseTraits, PropertiesT&gt;;
 		}
 		/*!
 		\include ObjectType.xml
@@ -61,40 +61,40 @@ namespace srdev
 		using ObjectType = ObjectTypeT::Traits;
 	}
 	/// \copydoc System::ObjectType
-	template<>
-	struct ObjectAccess<System::ObjectType> : public ObjectImpl<System::ObjectType::BaseTraits>
+	template&lt;&gt;
+	struct ObjectAccess&lt;System::ObjectType&gt; : public ObjectImpl&lt;System::ObjectType::BaseTraits&gt;
 	{
 		StringValuePtr getName() const
 		{
 			auto property = getProperty(System::ObjectType::Properties::Name::Id);
-			return property->getValue();
+			return property-&gt;getValue();
 		}
 		void setName(StringValuePtr value)
 		{
 			auto property = getProperty(System::ObjectType::Properties::Name::Id);
-			property->setValue(value);
+			property-&gt;setValue(value);
 		}
 
 		StringValuePtr getDisplayName() const
 		{
 			auto property = getProperty(System::ObjectType::Properties::DisplayName::Id);
-			return property->getValue();
+			return property-&gt;getValue();
 		}
 		void setDisplayName(StringValuePtr value)
 		{
 			auto property = getProperty(System::ObjectType::Properties::DisplayName::Id);
-			property->setValue(value);
+			property-&gt;setValue(value);
 		}
 
 		VectorValuePtr getPropertyTypes() const
 		{
 			auto property = getProperty(System::ObjectType::Properties::PropertyTypes::Id);
-			return property->getValue();
+			return property-&gt;getValue();
 		}
 		void setPropertyTypes(VectorValuePtr value)
 		{
 			auto property = getProperty(System::ObjectType::Properties::PropertyTypes::Id);
-			property->setValue(value);
+			property-&gt;setValue(value);
 		}
 	};
 	namespace System
@@ -109,7 +109,7 @@ namespace srdev
 					static String getName() { return "Name"; }
 					static ValuePtr getDefaultValue() { return StringValue::make(String()); }
 				};
-				using Traits = PropertyTraits<PropertyT,String, BaseTraits::Properties::LastId + 0 >;
+				using Traits = PropertyTraits&lt;PropertyT,String, BaseTraits::Properties::LastId + 0 &gt;;
 			}
 			namespace DisplayName
 			{
@@ -118,7 +118,7 @@ namespace srdev
 					static String getName() { return "DisplayName"; }
 					static ValuePtr getDefaultValue() { return StringValue::make(String()); }
 				};
-				using Traits = PropertyTraits<PropertyT,String, BaseTraits::Properties::LastId + 1 >;
+				using Traits = PropertyTraits&lt;PropertyT,String, BaseTraits::Properties::LastId + 1 &gt;;
 			}
 			namespace Type
 			{
@@ -127,7 +127,7 @@ namespace srdev
 					static String getName() { return "Type"; }
 					static ValuePtr getDefaultValue() { return StringValue::make(String()); }
 				};
-				using Traits = PropertyTraits<PropertyT,String, BaseTraits::Properties::LastId + 2 >;
+				using Traits = PropertyTraits&lt;PropertyT,String, BaseTraits::Properties::LastId + 2 &gt;;
 			}
 			struct ObjectT
 			{
@@ -140,10 +140,10 @@ namespace srdev
 				using Name = Name::Traits;
 				using DisplayName = DisplayName::Traits;
 				using Type = Type::Traits;
-				using List = std::tuple<Name,DisplayName,Type>;
-				enum { LastId = std::tuple_size<List>::value };
+				using List = std::tuple&lt;Name,DisplayName,Type&gt;;
+				enum { LastId = std::tuple_size&lt;List&gt;::value };
 			};
-			using Traits = ObjectTraits<ObjectT, BaseTraits, PropertiesT>;
+			using Traits = ObjectTraits&lt;ObjectT, BaseTraits, PropertiesT&gt;;
 		}
 		/*!
 		\include PropertyType.xml
@@ -152,40 +152,40 @@ namespace srdev
 		using PropertyType = PropertyTypeT::Traits;
 	}
 	/// \copydoc System::PropertyType
-	template<>
-	struct ObjectAccess<System::PropertyType> : public ObjectImpl<System::PropertyType::BaseTraits>
+	template&lt;&gt;
+	struct ObjectAccess&lt;System::PropertyType&gt; : public ObjectImpl&lt;System::PropertyType::BaseTraits&gt;
 	{
 		StringValuePtr getName() const
 		{
 			auto property = getProperty(System::PropertyType::Properties::Name::Id);
-			return property->getValue();
+			return property-&gt;getValue();
 		}
 		void setName(StringValuePtr value)
 		{
 			auto property = getProperty(System::PropertyType::Properties::Name::Id);
-			property->setValue(value);
+			property-&gt;setValue(value);
 		}
 
 		StringValuePtr getDisplayName() const
 		{
 			auto property = getProperty(System::PropertyType::Properties::DisplayName::Id);
-			return property->getValue();
+			return property-&gt;getValue();
 		}
 		void setDisplayName(StringValuePtr value)
 		{
 			auto property = getProperty(System::PropertyType::Properties::DisplayName::Id);
-			property->setValue(value);
+			property-&gt;setValue(value);
 		}
 
 		StringValuePtr getType() const
 		{
 			auto property = getProperty(System::PropertyType::Properties::Type::Id);
-			return property->getValue();
+			return property-&gt;getValue();
 		}
 		void setType(StringValuePtr value)
 		{
 			auto property = getProperty(System::PropertyType::Properties::Type::Id);
-			property->setValue(value);
+			property-&gt;setValue(value);
 		}
 	};
 }

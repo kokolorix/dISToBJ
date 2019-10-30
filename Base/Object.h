@@ -88,6 +88,7 @@ namespace srdev
 		Result(const String& n, ObjectPtr& o, ValuePtr r) :name_(n), object_(o), result_(r) {}
 		Result(const Result& r) = default;
 		Result(Result&& r) = default;
+		~Result() {}
 
 	private:
 		//IdType _id;

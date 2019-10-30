@@ -6,23 +6,49 @@
 #include "Cast.h"
 namespace srdev
 {
-	class Value;
-	struct ValuePtr : public shared_ptr<const Value>
+	template<typename T>
+	struct ValuePtrImpl : public shared_ptr<const T>
 	{
-		using Base = shared_ptr<const Value>;
+		using Base = shared_ptr<const T>;
 		using Base::Base;
-		ValuePtr() : Base() {}
-		ValuePtr(Base ptr) : Base(ptr) {}
-		template<typename T>
-		ValuePtr(T v);
-		//template<>
-		//ValuePtr(const String::value_type* v);
+		ValuePtrImpl() : Base() {}
+		ValuePtrImpl(Base ptr) : Base(ptr) {}
+		template<typename R>
+		ValuePtrImpl(R v);
+		//operator T() const
+		//{
+		//	return **this;
+		//}
+		//template<typename R>
+		//operator ValuePtrType<typename R>
+		//{
+		//	assert(std::is_base_of<T, R>::value);
+		//	return dynamic_pointer_cast<R>(*this);
+		//}
 		operator int32_t() const;
 		operator uint32_t() const;
 		operator double() const;
 		operator String() const;
-		operator UuId() const;
 	};
+
+	class Value;
+	using ValuePtr = ValuePtrImpl<Value>;
+	//struct ValuePtr : public shared_ptr<const Value>
+	//{
+	//	using Base = shared_ptr<const Value>;
+	//	using Base::Base;
+	//	ValuePtr() : Base() {}
+	//	ValuePtr(Base ptr) : Base(ptr) {}
+	//	template<typename T>
+	//	ValuePtr(T v);
+	//	//template<>
+	//	//ValuePtr(const String::value_type* v);
+	//	operator int32_t() const;
+	//	operator uint32_t() const;
+	//	operator double() const;
+	//	operator String() const;
+	//	operator UuId() const;
+	//};
 	using ValuePtrVector = std::vector<ValuePtr>;
 	using Vector = ValuePtrVector;
 	class Value : public Base
@@ -112,15 +138,32 @@ namespace srdev
 	};
 
 	using VoidValue = ValueImpl<void>;
+	using VoidValuePtr = ValuePtrImpl<void>;
+
 	using BooleanValue = ValueImpl<bool>;
+	using BooleanValuePtr = ValuePtrImpl<bool>;
+
 	using Int32Value = ValueImpl<int32_t>;
+	using Int32ValuePtr = ValuePtrImpl<int32_t>;
+
 	using UInt32Value = ValueImpl<uint32_t>;
+	using UInt32ValuePtr = ValuePtrImpl<uint32_t>;
+
 	using Int64Value = ValueImpl<int64_t>;
 	using UInt64Value = ValueImpl<uint64_t>;
+
 	using DoubleValue = ValueImpl<double>;
+	using DoubleValuePtr = ValuePtrImpl<double>;
+
 	using StringValue = ValueImpl<String>;
+	using StringValuePtr = ValuePtrImpl<String>;
+
 	using UuIdValue = ValueImpl<UuId>;
+
 	using VectorValue = ValueImpl<ValuePtrVector>;
+	using VectorValuePtr = ValuePtrImpl<ValuePtrVector>;
+
+
 	template<typename T>
 	inline ValuePtr Value::make(T v)
 	{
@@ -137,14 +180,74 @@ namespace srdev
 		return v;
 	}
 
-	template< typename T >
-	inline ValuePtr::ValuePtr(T v) : Base(Value::make(v))
+	template< typename T>
+	template< typename R >
+	inline ValuePtrImpl<typename T>::ValuePtrImpl(R v) : Base(Value::make(v))
 	{
 	}
+	//template< typename T >
+	//inline ValuePtr::ValuePtr(T v) : Base(Value::make(v))
+	//{
+	//}
 	//template<>
 	//inline ValuePtr::ValuePtr(const String::value_type* v) : Base(Value::make(v))
 	//{
 	//}
+
+	template<typename T>
+	ValuePtrImpl<typename T>::operator int32_t() const
+	{
+		if (auto p = dynamic_pointer_cast<const ValueImpl<int32_t>>(*this))
+			return p->getValue();
+		else if (auto p = dynamic_pointer_cast<const ValueImpl<double>>(*this))
+			return cast<int32_t>(p->getValue());
+		else if (auto p = dynamic_pointer_cast<const ValueImpl<uint32_t>>(*this))
+			return cast<int32_t>(p->getValue());
+		else if (auto p = dynamic_pointer_cast<const ValueImpl<String>>(*this))
+			return cast<int32_t>(p->getValue());
+		else
+			throw ImpossibleCastException(__func__);
+	}
+
+	template<typename T>
+	ValuePtrImpl<typename T>::operator uint32_t() const
+	{
+		if (auto p = dynamic_pointer_cast<const ValueImpl<uint32_t>>(*this))
+			return p->getValue();
+		else if (auto p = dynamic_pointer_cast<const ValueImpl<double>>(*this))
+			return cast<uint32_t>(p->getValue());
+		else if (auto p = dynamic_pointer_cast<const ValueImpl<int32_t>>(*this))
+			return cast<uint32_t>(p->getValue());
+		else if (auto p = dynamic_pointer_cast<const ValueImpl<String>>(*this))
+			return cast<uint32_t>(p->getValue());
+		else
+			throw ImpossibleCastException(__func__);
+	}
+
+	template<typename T>
+	ValuePtrImpl<typename T>::operator double() const
+	{
+		if (auto p = dynamic_pointer_cast<const ValueImpl<double>>(*this))
+			return p->getValue();
+		else if (auto p = dynamic_pointer_cast<const ValueImpl<int32_t>>(*this))
+			return cast<double>(p->getValue());
+		else if (auto p = dynamic_pointer_cast<const ValueImpl<String>>(*this))
+			return cast<double>(p->getValue());
+		else
+			throw ImpossibleCastException(__func__);
+	}
+
+	template<typename T>
+	ValuePtrImpl<typename T>::operator String() const
+	{
+		return (*this) ? (*this)->toString() : String();
+	}
+
+	//ValuePtr::operator UuId() const
+	//{
+	//	throw ImpossibleCastException(__func__);
+	//}
+
 
 	inline bool operator < (ValuePtr x, ValuePtr y)
 	{

@@ -11,6 +11,9 @@ namespace srdev
 		struct ObjectTests : public Case
 		{
 			virtual TestResult runTest() override;
+
+			void ptrTest();
+
 		};
 	}
 }
