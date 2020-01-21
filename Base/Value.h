@@ -182,7 +182,7 @@ namespace srdev
 
 	template< typename T>
 	template< typename R >
-	inline ValuePtrImpl<typename T>::ValuePtrImpl(R v) : Base(Value::make(v))
+	inline ValuePtrImpl<T>::ValuePtrImpl(R v) : Base(Value::make(v))
 	{
 	}
 	//template< typename T >
@@ -195,7 +195,7 @@ namespace srdev
 	//}
 
 	template<typename T>
-	ValuePtrImpl<typename T>::operator int32_t() const
+	ValuePtrImpl< T>::operator int32_t() const
 	{
 		if (auto p = dynamic_pointer_cast<const ValueImpl<int32_t>>(*this))
 			return p->getValue();
@@ -210,7 +210,7 @@ namespace srdev
 	}
 
 	template<typename T>
-	ValuePtrImpl<typename T>::operator uint32_t() const
+	ValuePtrImpl< T>::operator uint32_t() const
 	{
 		if (auto p = dynamic_pointer_cast<const ValueImpl<uint32_t>>(*this))
 			return p->getValue();
@@ -225,7 +225,7 @@ namespace srdev
 	}
 
 	template<typename T>
-	ValuePtrImpl<typename T>::operator double() const
+	ValuePtrImpl< T>::operator double() const
 	{
 		if (auto p = dynamic_pointer_cast<const ValueImpl<double>>(*this))
 			return p->getValue();
@@ -238,7 +238,7 @@ namespace srdev
 	}
 
 	template<typename T>
-	ValuePtrImpl<typename T>::operator String() const
+	ValuePtrImpl< T>::operator String() const
 	{
 		return (*this) ? (*this)->toString() : String();
 	}

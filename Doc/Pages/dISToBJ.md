@@ -24,10 +24,12 @@
 - srdev::Property modulates a the srdev::Property from an srdev::Object
 
 [Go to the graphical class hierarchy](inherits.html)
+
 \ref markdown
 
-\addtogroup Base
+\ref db-model
 
+\addtogroup Base
 This module contains basic constructs like srdev::Base or srdev::cast
 
 \addtogroup Traits
@@ -35,9 +37,14 @@ This module contains traits and wrappers for object classes and instances.
 - srdev::ObjectAccess< System::ObjectType >
 - srdev::ObjectAccess< System::PropertyType >
 
+\addtogroup Test
+The test module contains uint tests for each construct.
+Each test is inherited from srdev::Test::Case
+
+
 \page markdown Markdown Syntax
 \htmlonly
- <iframe src="../markdown-guide.pdf" width="100%" scrolling="no" frameborder="0" id="markdown-guide.iframe">markdown</iframe> 
+ <iframe src="External/markdown-guide.pdf" width="100%" scrolling="no" frameborder="0" id="markdown-guide.iframe">markdown</iframe> 
 
 <script>
 var iframe = document.getElementById("markdown-guide.iframe");    
@@ -46,3 +53,6 @@ window.onresize = function(){   iframe.style.height = ( window.innerHeight - 200
 </script>
 
 \endhtmlonly
+
+\page db-model ObjectDb 
+\dotfile ObjectDb.dot "Object databse model" 

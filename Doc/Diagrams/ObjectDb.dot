@@ -1,0 +1,85 @@
+# Created by Model Xtractor 2.1
+digraph G {
+  graph [ rankdir="LR" bgcolor="#ffffff" ]
+  node [ style="filled" shape="Mrecord" gradientangle=180 ]
+  edge [ arrowhead="none" arrowtail="none" dir="both" ]
+
+  n1 [
+    fillcolor="#ffffff" color="#8a8a8a" penwidth="2"
+    label=<<table style ="rounded" border="0" cellborder="0" cellspacing="0" cellpadding="1">
+      <tr><td bgcolor="#99bfd9" align="center" colspan="2"><font color="#000000"><b>value</b></font></td></tr>
+      <tr><td align="left"><font color="#000000"><u>id</u></font></td><td align="left"><font color="#000000">INTEGER *</font></td></tr>
+      <tr><td align="left"><font color="#000000"><i>type</i></font></td><td align="left"><font color="#000000">*</font></td></tr>
+      <tr><td align="left"><font color="#000000"><i>property</i></font></td><td align="left"><font color="#000000">*</font></td></tr>
+      <tr><td align="left"><font color="#000000">value</font></td><td align="left"><font color="#000000">STRING *</font></td></tr>
+      <tr><td align="left"><font color="#000000"><i>parent</i></font></td><td align="left"><font color="#000000">*</font></td></tr>
+      <tr><td align="left"><font color="#000000">version</font></td><td align="left"><font color="#000000">INTEGER *</font></td></tr>
+    </table>>
+  ]
+  n8 [
+    fillcolor="#ffffff" color="#8a8a8a" penwidth="2"
+    label=<<table style ="rounded" border="0" cellborder="0" cellspacing="0" cellpadding="1">
+      <tr><td bgcolor="#99bfd9" align="center" colspan="2"><font color="#000000"><b>object</b></font></td></tr>
+      <tr><td align="left"><font color="#000000"><u>id</u></font></td><td align="left"><font color="#000000">INTEGER</font></td></tr>
+      <tr><td align="left"><font color="#000000"><i>type</i></font></td><td align="left"><font color="#000000">INTEGER *</font></td></tr>
+      <tr><td align="left"><font color="#000000">version</font></td><td align="left"><font color="#000000">INTEGER</font></td></tr>
+    </table>>
+  ]
+  n12 [
+    fillcolor="#ffffff" color="#8a8a8a" penwidth="2"
+    label=<<table style ="rounded" border="0" cellborder="0" cellspacing="0" cellpadding="1">
+      <tr><td bgcolor="#99bfd9" align="center" colspan="2"><font color="#000000"><b>property</b></font></td></tr>
+      <tr><td align="left"><font color="#000000"><u>id</u></font></td><td align="left"><font color="#000000">INTEGER *</font></td></tr>
+      <tr><td align="left"><font color="#000000">name</font></td><td align="left"><font color="#000000">STRING *</font></td></tr>
+      <tr><td align="left"><font color="#000000"><i>object</i></font></td><td align="left"><font color="#000000">INTEGER</font></td></tr>
+      <tr><td align="left"><font color="#000000">version</font></td><td align="left"><font color="#000000">INTEGER</font></td></tr>
+    </table>>
+  ]
+  n17 [
+    fillcolor="#ffffff" color="#8a8a8a" penwidth="2"
+    label=<<table style ="radial" border="0" cellborder="0" cellspacing="0" cellpadding="1">
+      <tr><td bgcolor="#4b9e21" align="center" colspan="2"><font color="#000000">ObjectList</font></td></tr>
+      <tr><td align="left"><font color="#000000">Id</font></td><td align="left"><font color="#000000">INTEGER</font></td></tr>
+      <tr><td align="left"><font color="#000000">Name</font></td><td align="left"><font color="#000000">STRING</font></td></tr>
+      <tr><td align="left"><font color="#000000">Description</font></td><td align="left"><font color="#000000">STRING</font></td></tr>
+      <tr><td align="left"><font color="#000000">TypeId</font></td><td align="left"><font color="#000000">INTEGER</font></td></tr>
+      <tr><td align="left"><font color="#000000">TypeName</font></td><td align="left"><font color="#000000">STRING</font></td></tr>
+    </table>>
+  ]
+  n23 [
+    fillcolor="#ffffff" color="#8a8a8a" penwidth="2"
+    label=<<table style ="radial" border="0" cellborder="0" cellspacing="0" cellpadding="1">
+      <tr><td bgcolor="#4b9e21" align="center" colspan="2"><font color="#000000">PropertyList</font></td></tr>
+      <tr><td align="left"><font color="#000000">Id</font></td><td align="left"><font color="#000000">INTEGER</font></td></tr>
+      <tr><td align="left"><font color="#000000">Name</font></td><td align="left"><font color="#000000">STRING</font></td></tr>
+      <tr><td align="left"><font color="#000000">Value</font></td><td align="left"><font color="#000000">STRING</font></td></tr>
+      <tr><td align="left"><font color="#000000">ValueType</font></td><td align="left"><font color="#000000">STRING</font></td></tr>
+      <tr><td align="left"><font color="#000000">ValueId</font></td><td align="left"><font color="#000000">INTEGER</font></td></tr>
+      <tr><td align="left"><font color="#000000">ValueTypeId</font></td><td> </td></tr>
+      <tr><td align="left"><font color="#000000">ObjectType</font></td><td align="left"><font color="#000000">STRING</font></td></tr>
+      <tr><td align="left"><font color="#000000">ObjectId</font></td><td align="left"><font color="#000000">INTEGER</font></td></tr>
+      <tr><td align="left"><font color="#000000">ObjectTypeId</font></td><td align="left"><font color="#000000">INTEGER</font></td></tr>
+    </table>>
+  ]
+
+  n8 -> n8 [
+    penwidth=2 color="#8a8a8a" style="dashed"
+    arrowtail="crow"
+  ]
+  n12 -> n8 [
+    penwidth=2 color="#8a8a8a"
+    arrowtail="crow"
+  ]
+  n1 -> n8 [
+    penwidth=2 color="#8a8a8a" style="dashed"
+    arrowtail="crow"
+  ]
+  n1 -> n12 [
+    penwidth=2 color="#8a8a8a" style="dashed"
+    arrowtail="crow"
+  ]
+  n1 -> n1 [
+    penwidth=2 color="#8a8a8a" style="dashed"
+    arrowtail="crow"
+  ]
+}
