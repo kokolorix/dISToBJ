@@ -151,11 +151,11 @@
 		<xsl:param name="object"/>
 		<xsl:variable name="type" select="@type"/>
 		<xsl:variable name="name" select="@name"/>
-		<xsl:value-of select="concat($tab2, $type, 'ValuePtr get', $name, '() const', $newLine1, $tab2, '{', $newLine1)"/>
+		<xsl:value-of select="concat($tab2, 'ValuePtr get', $name, '() const', $newLine1, $tab2, '{', $newLine1)"/>
 		<xsl:value-of select="concat($tab3, 'auto property = getProperty(', $object, '::Properties::', $name, '::Id);', $newLine1)"/>
 		<xsl:value-of select="concat($tab3, 'return property-&gt;getValue();', $newLine1)"/>
 		<xsl:value-of select="concat($tab2, '}', $newLine1)"/>
-		<xsl:value-of select="concat($tab2, 'void set', $name, '(', $type, 'ValuePtr value)', $newLine1, $tab2, '{', $newLine1)"/>
+		<xsl:value-of select="concat($tab2, 'void set', $name, '(ValuePtr value)', $newLine1, $tab2, '{', $newLine1)"/>
 		<xsl:value-of select="concat($tab3, 'auto property = getProperty(', $object, '::Properties::', $name, '::Id);', $newLine1)"/>
 		<xsl:value-of select="concat($tab3, 'property-&gt;setValue(value);', $newLine1)"/>
 		<xsl:value-of select="concat($tab2, '}', $newLine1)"/>
